@@ -5,7 +5,7 @@ from datetime import datetime, date, timedelta
 app = Flask(__name__)
 cg = CoinGeckoAPI()
 
-def crypto(crp="bitcoin", currency="usd", data="01-01-2015"):
+def crypto(crp, currency, data):
     #funkcja przyjmuje wartości domyślne dla Bitcoina, dolarów i daty aktualnej
     result = {}
     cena = cg.get_coin_history_by_id(crp, data)
@@ -14,21 +14,20 @@ def crypto(crp="bitcoin", currency="usd", data="01-01-2015"):
     result["Data"] = data
     return result 
 
-def getCrypto(crp, currency, data_pocz, data_kon):
+def getCrypto(crp, currency, data_pocz, data_kon): #DATA MUSI BYĆ W FORMACIE (RRRR, MM, DD) BEZ ZER NP (2020, 5, 5)
     result = {}
-    lista_dat = []
-    date_format_original = "%Y-%m-%d"
-    date_format_new = "%d-%m-%Y"
-    numer_wiersza = 0
-    delta = datetime.strptime(data_kon, date_format_original) - datetime.strptime(data_pocz, date_format_original)
-    division_number = 30 # szacowana liczba wyników
-    #liczy ile dni jest pomiędzy datą końcową a początkową
-    for i in range(0, delta.days + 1, delta.days//division_number):
-        data = datetime.strptime(data_pocz, date_format_original) + timedelta(days = i)
-        lista_dat.append(data.strftime(date_format_new))
-    for x in lista_dat:
-        numer_wiersza = numer_wiersza + 1
-        result[numer_wiersza] = (crypto(crp, currency, x))
+    numer_wiersza = 1
+    year, month, day = data_pocz #ZMIENIA TYP DANYCH NA INT
+    year2, month2, day2 = data_kon
+    start_date = date(year, month, day) #TWORZY DATE DO PĘTLI
+    end_date = date(year2, month2, day2)
+    delta = timedelta(days=1)
+    while start_date <= end_date:
+      datetimeobject = datetime.strptime(str(start_date), '%Y-%m-%d') #ZMIENIA FORMAT ODPOWIEDI DLA API
+      new_format = datetimeobject.strftime('%d-%m-%Y') 
+      result[numer_wiersza] = crypto(crp, currency, new_format)
+      numer_wiersza += 1
+      start_date += delta
     return result
 
 @app.route('/')
