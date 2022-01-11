@@ -31,5 +31,5 @@ def getCrypto(crp, currency, data_pocz, data_kon): #DATA MUSI BYĆ W FORMACIE (R
     return result
 
 @app.route('/')
-def strona_glowna():
-    pass
+def home():
+    return render_template("home.html", zmienna="Hello world")
