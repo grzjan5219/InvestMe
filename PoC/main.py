@@ -6,7 +6,6 @@ from pandas_datareader import data as pdr
 import pandas as pd
 
 app = Flask(__name__)
-cg = CoinGeckoAPI()
 
 yf.pdr_override()
 pd.set_option("display.max_rows", None, "display.max_columns", None)
