@@ -1,34 +1,20 @@
 from flask import Flask, render_template
-from pycoingecko import CoinGeckoAPI
 from datetime import datetime, date, timedelta
+from pandas._libs.tslibs.timestamps import Timestamp
+import yfinance as yf
+from pandas_datareader import data as pdr
+import pandas as pd
 
 app = Flask(__name__)
 cg = CoinGeckoAPI()
 
-def crypto(crp, currency, data):
-    #funkcja przyjmuje wartości domyślne dla Bitcoina, dolarów i daty aktualnej
-    result = {}
-    cena = cg.get_coin_history_by_id(crp, data)
-    result["Typ kryptowaluty"] = crp
-    result["Cena"] = round(cena["market_data"]["current_price"][currency], 2)
-    result["Data"] = data
-    return result 
+yf.pdr_override()
+pd.set_option("display.max_rows", None, "display.max_columns", None)
 
-def getCrypto(crp, currency, data_pocz, data_kon): #DATA MUSI BYĆ W FORMACIE (RRRR, MM, DD) BEZ ZER NP (2020, 5, 5)
-    result = {}
-    numer_wiersza = 1
-    year, month, day = data_pocz #ZMIENIA TYP DANYCH NA INT
-    year2, month2, day2 = data_kon
-    start_date = date(year, month, day) #TWORZY DATE DO PĘTLI
-    end_date = date(year2, month2, day2)
-    delta = timedelta(days=1)
-    while start_date <= end_date:
-      datetimeobject = datetime.strptime(str(start_date), '%Y-%m-%d') #ZMIENIA FORMAT ODPOWIEDI DLA API
-      new_format = datetimeobject.strftime('%d-%m-%Y') 
-      result[numer_wiersza] = crypto(crp, currency, new_format)
-      numer_wiersza += 1
-      start_date += delta
-    return result
+def getCrypto(crp, data_start, data_end):
+    crphistory = pdr.get_data_yahoo(crp, start=data_start, end=data_end)
+    x = crphistory.to_dict()
+    return x["Open"]
 
 @app.route('/')
 def home():
