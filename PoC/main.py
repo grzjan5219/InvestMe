@@ -34,32 +34,42 @@ class RealTimeCurrencyConverter():
 yf.pdr_override()
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
-def getCrypto(crp, data_start, data_end, type):
+def getCrypto(crp, data_start, data_end):
     crphistory = pdr.get_data_yahoo(crp, start=data_start, end=data_end)
     x = crphistory.to_dict()
-    return x[f"{type}"]
+    return x
 
-def exchange(crp, data_start, data_end, currency, type):
+def exchange(crp, data_start, data_end, currency):
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
     converter = RealTimeCurrencyConverter(url)
-    x = getCrypto(crp, data_start, data_end, type)
-    dates = []
-    prices = []
-    exchanged_prices = []
-    for key, value in x.items():
-        dates.append(key)
-        prices.append(value)
+    x = getCrypto(crp, data_start, data_end)
+    keys_to_remove = ["Adj Close", "Volume"]
+    for key in keys_to_remove:
+        x.pop(key)
+    format = "%Y-%m-%d"
+    start = datetime.datetime.strptime(data_start, format)
+    end = datetime.datetime.strptime(data_end, format)
+    delta = datetime.timedelta(days=1)
+    days = end - start
+    
 
-    for _ in prices:
-        exchanged_prices.append(converter.convert('USD', f'{currency}', _))
+    start -= delta
 
-    result = dict(zip(dates, exchanged_prices))
-
-    #filehandler = open("krypto.txt", "wt")
-    #data = str(result)
-    #filehandler.write(data)
-
-    return result
+    lista_calosc = []
+    
+     
+    for i in range(days.days):
+        lst = []
+        lst.append(str(start.date()))
+        lst.append(crp)
+        for key in x:
+            for date, price in x[key].items():
+                if str(date)[:10] == str(start.date()):
+                    lst.append(converter.convert('USD', f'{currency}', price))    
+        lista_calosc.append(lst)
+        start += delta
+                           
+    return lista_calosc #ZWRACA LISTE ZAGNIEŻDZONĄ W FORMACIE [DATA, CRYPTO, OPEN, HIGH, LOW, CLOSE]
 
 def getGraph():
     df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
