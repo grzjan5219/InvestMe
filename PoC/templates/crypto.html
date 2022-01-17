@@ -5,7 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="src/styles/styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='styles.css') }}"
+    />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   </head>
   <body>
     <main class="main">
@@ -14,56 +20,95 @@
         <div class="left">
           <div class="currency-price">
             <div class="box-one">
-              <img src="src/img/btc.png" alt="" />
-              <p>Bitcoin (BTC)</p>
+              <img
+                class="logo"
+                src=" {{ url_for('static', filename='img/' + crypto + '.png') }}"
+                alt=""
+              />
+
+              {% if crypto == "BTC-USD" %}
+              <p>Bitcoin</p>
+              <!-- (<div class="select">
+                <select name="format" class="format">
+                   <option class="first-op" selected disabled  >BTC-USD</option>
+                   <a href="/PLN/BTC-USD"><option value="pdf" >BTC-PLN</option></a>
+                   <option value="txt">txt</option>
+                   <option value="epub">ePub</option>
+                   <option value="fb2">fb2</option>
+                   <option value="mobi">mobi</option>
+                </select>
+              </div>) -->
+              {% elif crypto == "ETH-USD" %}
+              <p>ETHERUM (<div class="select">
+                <select name="format" id="format">
+                   <option selected disabled>Choose a book format</option>
+                   <option value="pdf">PDF</option>
+                   <option value="txt">txt</option>
+                   <option value="epub">ePub</option>
+                   <option value="fb2">fb2</option>
+                   <option value="mobi">mobi</option>
+                </select>
+             </div>)</p>
+              {% else %}
+              <p></p>
+              {% endif %}
             </div>
             <div class="box-two">
-              <p class="price">41 774,10$</p>
-              <p class="procent">2.6%</p>
-              <svg
-                class="arrow"
-                xmlns="http://www.w3.org/2000/svg"
-                width="43.983"
-                height="43.983"
-                viewBox="0 0 43.983 43.983"
-              >
-                <path
-                  id="Icon_awesome-arrow-up"
-                  data-name="Icon awesome-arrow-up"
-                  d="M2.454,20.355.893,18.795a1.681,1.681,0,0,1,0-2.384L14.555,2.742a1.681,1.681,0,0,1,2.384,0L30.6,16.4a1.681,1.681,0,0,1,0,2.384l-1.561,1.561a1.689,1.689,0,0,1-2.412-.028l-8.065-8.466V32.063a1.683,1.683,0,0,1-1.687,1.688h-2.25a1.683,1.683,0,0,1-1.687-1.687V11.855L4.866,20.327a1.677,1.677,0,0,1-2.412.028Z"
-                  transform="translate(23.584 -1.869) rotate(45)"
-                  fill="#988363"
-                />
-              </svg>
+              <p class="price">{{currentPrice}}</p>
+              <p class="procent">{{currentProcentage}}%</p>
+
+              {% if currentProcentage >= 0 %}
+              <img
+                class="logo-arrow"
+                src=" {{ url_for('static', filename='img/arr_up.png') }}"
+                alt=""
+              />
+              {% else %}
+              <img
+                class="logo-arrow"
+                src=" {{ url_for('static', filename='img/arr_down.png') }}"
+              />
+              {% endif %}
             </div>
           </div>
           <div class="currencys">
             <p class="currency-title">Cryptocurrencies </p>
             <div class="currency-container">
-              <div class="crypto">
-                <img src="src/img/eth.png" alt="" />
-                <p class="crypto-price">3127.26$</p>
-                <p class="crypto-procent">2.6%</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="43.983"
-                  height="43.983"
-                  viewBox="0 0 43.983 43.983"
-                >
-                  <path
-                    id="Icon_awesome-arrow-up"
-                    data-name="Icon awesome-arrow-up"
-                    d="M2.454,20.355.893,18.795a1.681,1.681,0,0,1,0-2.384L14.555,2.742a1.681,1.681,0,0,1,2.384,0L30.6,16.4a1.681,1.681,0,0,1,0,2.384l-1.561,1.561a1.689,1.689,0,0,1-2.412-.028l-8.065-8.466V32.063a1.683,1.683,0,0,1-1.687,1.688h-2.25a1.683,1.683,0,0,1-1.687-1.687V11.855L4.866,20.327a1.677,1.677,0,0,1-2.412.028Z"
-                    transform="translate(23.584 -1.869) rotate(45)"
-                    fill="#988363"
+              {% for el in cryptos %}
+              <a href="{{el.name}}">
+                <div class="crypto">
+                  <img
+                    class="crypto_logo"
+                    src="{{ url_for('static', filename='img/' + el.name + '.png') }}"
                   />
-                </svg>
-              </div>
+                  <p class="crypto-price">{{el.price}}</p>
+                  <p class="crypto-procent">{{el.percentage}}%</p>
+                  {% if el.percentage >= 0 %}
+                  <img
+                    class="arrow"
+                    src=" {{ url_for('static', filename='img/arr_up.png') }}"
+                    alt=""
+                  />
+
+                  {% elif el.percentage < 0 %}
+                  <img
+                    class="arrow"
+                    src=" {{ url_for('static', filename='img/arr_down.png') }}"
+                  />
+                  {% endif %}
+                </div>
+              </a>
+              {% endfor %}
             </div>
           </div>
         </div>
         <div class="right">
-          <div class="chart"> </div>
+          <div class="chart" id="bargraph">
+            <script type="text/javascript">
+              var graphs = {{graphJSON | safe}};
+              Plotly.plot('bargraph',graphs,{});
+            </script>
+          </div>
           <div class="container">
             <div class="exchange"></div>
             <div class="cos"></div>
