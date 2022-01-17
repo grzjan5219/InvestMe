@@ -6,13 +6,94 @@ import json
 import plotly
 import plotly.express as px
 import plotly.graph_objects as go
-from cgitb import reset
-from logging import FileHandler
-from xml.etree.ElementTree import XML
+import json
+import numpy as np
+from currency_converter import CurrencyConverter
 from pandas._libs.tslibs.timestamps import Timestamp
+import csv
+import datetime
 import requests
 
+
 app = Flask(__name__)
+
+
+def getGraph():
+    df = pd.read_csv('CRP.csv')
+
+    fig = go.Figure(data=[go.Candlestick(x=df['Date'],
+                open=df['Open'],
+                high=df['High'],
+                low=df['Low'],
+                close=df['Close'])])
+    fig.update_layout(
+    plot_bgcolor='#312929',
+    paper_bgcolor="#312929",
+    font_color = "#EEE4E4",
+    font_family = "Poppins",
+    )
+
+    fig.update_xaxes(color="#EEE4E4", gridcolor="#443838")
+    fig.update_yaxes(color="#EEE4E4", gridcolor="#443838")
+    return fig
+
+
+
+def get(crypto, currency):
+    data = yf.download(tickers=f'{crypto}', period='1d', interval='1d')
+    b = list(data.Open)
+    pricee = round(b[0], 1)
+    c = CurrencyConverter()
+
+    return round(c.convert(pricee, 'USD', currency), 1)
+
+
+
+def to_percentage(crypto):
+    data = yf.download(tickers=f'{crypto}', period='2d', interval='1d')
+    a = data.Open
+    prices = list(a)
+
+    for a, b in zip(prices[::1], prices[1::1]):
+        percentage = 100 * (b - a) / a
+    return round(percentage, 2)
+
+
+@ app.route('/')
+def home():
+    return render_template("home.html" )
+
+
+@ app.route('/<currency>/<crypto>')
+def home1(currency, crypto):
+    # get graph
+    fig = getGraph()
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    # get currency price
+    currentPrice = get(crypto, currency)
+    # get currency Procentage
+    currentProcentage = to_percentage(crypto)
+
+    cryptos = [
+        {
+            'name': 'ETH-USD',
+            'price': get('ETH-USD', currency),
+            'img': "{{url_for('static', filename='img/ETH-USD')}",
+            'percentage': float(to_percentage('ETH-USD'))
+
+        },
+        {
+            'name': 'BTC-USD',
+            'price': get('BTC-USD', currency),
+            'img': "{{url_for('static', filename='img/BTC-USD')}",
+            'percentage': float(to_percentage('BTC-USD'))
+
+
+        },
+    ]
+
+    return render_template("crypto.html", currentPrice=currentPrice, cryptos=cryptos, crypto=crypto, currentProcentage=currentProcentage, graphJSON=graphJSON)
 
 class RealTimeCurrencyConverter():
     def __init__(self,url):
@@ -34,6 +115,7 @@ class RealTimeCurrencyConverter():
 yf.pdr_override()
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
+
 def getCrypto(crp, data_start, data_end):
     crphistory = pdr.get_data_yahoo(crp, start=data_start, end=data_end)
     x = crphistory.to_dict()
@@ -52,51 +134,29 @@ def exchange(crp, data_start, data_end, currency):
     delta = datetime.timedelta(days=1)
     days = end - start
     
-
     start -= delta
 
     lista_calosc = []
-    
      
     for i in range(days.days):
         lst = []
         lst.append(str(start.date()))
-        lst.append(crp)
         for key in x:
             for date, price in x[key].items():
                 if str(date)[:10] == str(start.date()):
-                    lst.append(converter.convert('USD', f'{currency}', price))    
+                    lst.append(converter.convert('USD', f'{currency}', price))  
+        lst.append(crp)
         lista_calosc.append(lst)
         start += delta
-                           
-    return lista_calosc #ZWRACA LISTE ZAGNIEŻDZONĄ W FORMACIE [DATA, CRYPTO, OPEN, HIGH, LOW, CLOSE]
 
-def getGraph():
-    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+    fields = ['Date', 'Open', 'High', 'Low', 'Close', 'ticker'] 
 
-    fig = go.Figure(data=[go.Candlestick(x=df['Date'],
-                open=df['AAPL.Open'],
-                high=df['AAPL.High'],
-                low=df['AAPL.Low'],
-                close=df['AAPL.Close'])])
-    fig.update_layout(
-    plot_bgcolor='#312929',
-    paper_bgcolor="#312929",
-    font_color = "#EEE4E4",
-    font_family = "Poppins",
-    )
+    with open("CRP.csv", 'w') as f:
+        write = csv.writer(f)
+        write.writerow(fields)
+        write.writerows(lista_calosc)
+    
+exchange("BTC-USD", "2018-01-02", "2020-01-05", "USD") 
 
-    fig.update_xaxes(color="#EEE4E4", gridcolor="#443838")
-    fig.update_yaxes(color="#EEE4E4", gridcolor="#443838")
-    return fig
-
-@app.route('/')
-def home():
-
-    fig = getGraph() 
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template("home.html", graphJSON=graphJSON)
-
-@app.route('/crypto')
-def home1():
-    return render_template("crypto.html")
+if __name__ == '__main__':
+    app.run(debug=True)
