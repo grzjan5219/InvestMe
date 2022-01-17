@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.main {
+  height: 100vh;
+  background-color: #333333;
+}
+.format {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.format::after {
+  color: black;
+  /* font-size: 25px; */
+}
+.title {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  margin-bottom: 7vh;
+}
+
+.flex-container {
+  display: flex;
+  width: 92vw;
+  margin-left: 6vw;
+}
+
+.left,
+.right {
+  height: 80vh;
+  margin: 0 auto;
+}
+
+.currency-price,
+.currencys,
+.chart,
+.container {
+  background-color: #312929;
+  border-radius: 10px;
+}
+
+.currency-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 25vw;
+  height: 17vh;
+  margin-bottom: 30px;
+}
+
+.box-one {
+  display: flex;
+  width: 18vw;
+  align-self: center;
+}
+
+.box-one p {
+  padding-top: 5px;
+}
+
+.box-two {
+  display: flex;
+  align-self: center;
+  width: 18vw;
+  justify-content: space-around;
+}
+
+.box-one p {
+  color: #eee4e4;
+  font-size: 20px;
+}
+
+.box-two .price {
+  color: #eee4e4;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.box-two .procent {
+  color: #eee4e4;
+  font-size: 18px;
+  padding-top: 20px;
+}
+.logo {
+  width: 40px;
+}
+
+.currencys {
+  width: 25vw;
+
+  height: 61vh;
+  /* height: 58.5vh; */
+}
+.logo-arrow {
+  padding: 20px;
+  height: 30px;
+}
+.arrow {
+  height: 30px;
+}
+.currency-title {
+  text-align: center;
+  color: white;
+  padding: 20px 0;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.currency-container {
+  /* overflow: scroll; */
+  height: 400px;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  text-align: center;
+}
+
+.crypto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 20vw;
+  padding-bottom: 20px;
+}
+
+.crypto .crypto-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: #eee4e4;
+}
+
+.crypto .crypto-procent {
+  font-size: 17px;
+  font-weight: 500;
+  color: #eee4e4;
+}
+
+.crypto_logo {
+  width: 50px;
+}
+
+.right {
+  width: calc(92vw - 20vw);
+  /* margin-left: 6vw; */
+}
+.chart {
+  width: 56vw;
+  height: 50vh;
+  margin: 0 auto;
+}
+
+.container {
+  width: 56vw;
+  height: 27.5vh;
+  margin: 2vw auto;
+
+  display: flex;
+}
+
+@media (max-width: 1600px) {
+  .currency-price,
+  .currencys {
+    width: 30vw;
+  }
+  .box-two,
+  .box-one,
+  .crypto {
+    width: 22vw;
+  }
+  .currencys {
+    height: 60.3vh;
+  }
+
+  .chart,
+  .container {
+    width: 50vw;
+  }
+}
+
+@media (max-width: 1295px) {
+  .box-two {
+    justify-content: space-around;
+  }
+  .box-two .price {
+    padding-top: 20px;
+    font-size: 25px;
+  }
+  .box-two .procent {
+    font-size: 15px;
+    padding-top: 30px;
+  }
+  .arrow {
+    padding-top: 18px;
+  }
+  .crypto .crypto-price {
+    font-size: 18px;
+  }
+  .crypto .crypto-procent {
+    font-size: 13px;
+  }
+
+  .currency-price,
+  .currencys {
+    width: 35vw;
+  }
+  .currencys {
+    height: 59vh;
+  }
+  .box-two,
+  .box-one,
+  .crypto {
+    width: 32vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .box-two .price {
+    font-size: 22px;
+  }
+  .box-two .procent {
+    font-size: 12px;
+  }
+  .arrow {
+    padding-top: 18px;
+  }
+  .crypto .crypto-price {
+    font-size: 14px;
+  }
+  .crypto .crypto-procent {
+    font-size: 10px;
+  }
+  .crypto img {
+    width: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .flex-container {
+    flex-wrap: wrap;
+  }
+  .currency-price,
+  .currencys {
+    width: 80vw;
+  }
+
+  .box-two,
+  .box-one,
+  .crypto {
+    width: 70vw;
+  }
+
+  .main {
+    height: 176vh;
+  }
+  .flex-container {
+    margin: 0 auto;
+  }
+
+  .right {
+    margin-left: 6vw;
+  }
+  .chart,
+  .container {
+    width: 80vw;
+  }
+  .currency-container {
+    height: 0vh;
+  }
+}
