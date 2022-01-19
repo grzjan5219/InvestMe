@@ -7,6 +7,10 @@
     <title>Document</title>
     <link
       rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
       type="text/css"
       href="{{ url_for('static',filename='styles.css') }}"
     />
@@ -25,33 +29,32 @@
                 src=" {{ url_for('static', filename='img/' + crypto + '.png') }}"
                 alt=""
               />
-
-              {% if crypto == "BTC-USD" %}
-              <p>Bitcoin</p>
-              <!-- (<div class="select">
-                <select name="format" class="format">
-                   <option class="first-op" selected disabled  >BTC-USD</option>
-                   <a href="/PLN/BTC-USD"><option value="pdf" >BTC-PLN</option></a>
-                   <option value="txt">txt</option>
-                   <option value="epub">ePub</option>
-                   <option value="fb2">fb2</option>
-                   <option value="mobi">mobi</option>
-                </select>
-              </div>) -->
-              {% elif crypto == "ETH-USD" %}
-              <p>ETHERUM (<div class="select">
-                <select name="format" id="format">
-                   <option selected disabled>Choose a book format</option>
-                   <option value="pdf">PDF</option>
-                   <option value="txt">txt</option>
-                   <option value="epub">ePub</option>
-                   <option value="fb2">fb2</option>
-                   <option value="mobi">mobi</option>
-                </select>
-             </div>)</p>
-              {% else %}
-              <p></p>
-              {% endif %}
+              <p>{{currentName}}</p>
+              <p>(</p>
+              <div class="dropdown">
+                <div class="dropdown-select">
+                  <span class="select">Choose</span>
+                  <i class="fa fa-caret-down icon"></i>
+                </div>
+                <div class="dropdown-list">
+                  <a href="/USD/{{crypto[: -3]}}USD/7d" class="a-list">
+                    <div class="dropdown-list__item">{{crypto[: -3]}}USD</div>
+                  </a>
+                  <a href="/PLN/{{crypto[: -3]}}USD/7d" class="a-list">
+                    <div class="dropdown-list__item">{{crypto[: -3]}}PLN</div>
+                  </a>
+                  <a href="/EUR/{{crypto[: -3]}}USD/7d" class="a-list">
+                    <div class="dropdown-list__item">{{crypto[: -3]}}EUR</div>
+                  </a>
+                  <a href="/GBP/{{crypto[: -3]}}USD/7d" class="a-list">
+                    <div class="dropdown-list__item">{{crypto[: -3]}}GBP</div>
+                  </a>
+                  <a href="/CHF/{{crypto[: -3]}}USD/7d" class="a-list">
+                    <div class="dropdown-list__item">{{crypto[: -3]}}CHF</div>
+                  </a>
+                </div>
+              </div>
+              <p>)</p>
             </div>
             <div class="box-two">
               <p class="price">{{currentPrice}}</p>
@@ -75,7 +78,7 @@
             <p class="currency-title">Cryptocurrencies </p>
             <div class="currency-container">
               {% for el in cryptos %}
-              <a href="{{el.name}}">
+              <a href="/PLN/{{el.name}}/7d">
                 <div class="crypto">
                   <img
                     class="crypto_logo"

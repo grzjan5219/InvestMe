@@ -9,9 +9,11 @@ from crc_conversion import *
 
 app = Flask(__name__)
 
+
 @ app.route('/')
 def home():
-    return render_template("home.html" )
+    return render_template("home.html")
+
 
 @ app.route('/<currency>/<crypto>/<time>')
 def home1(currency, crypto, time):
@@ -23,6 +25,11 @@ def home1(currency, crypto, time):
     currentPrice = get(crypto, currency)
     # # get currency Procentage
     currentProcentage = to_percentage(crypto)
+
+    if crypto == 'ETH-USD':
+        currentName = 'Ethereum'
+    elif crypto == 'BTC-USD':
+        currentName = 'Bitcoin'
 
     cryptos = [
         {
@@ -38,11 +45,11 @@ def home1(currency, crypto, time):
             'img': "{{url_for('static', filename='img/BTC-USD')}",
             'percentage': float(to_percentage('BTC-USD'))
 
-
         },
     ]
 
-    return render_template("crypto.html", currentPrice=currentPrice, cryptos=cryptos, crypto=crypto, currentProcentage=currentProcentage, graphJSON=graphJSON)
+    return render_template("crypto.html", currentPrice=currentPrice, cryptos=cryptos, crypto=crypto, currentProcentage=currentProcentage, graphJSON=graphJSON, currentName=currentName)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
