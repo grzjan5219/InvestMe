@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <script
+      src="https://kit.fontawesome.com/0c1bcce4d4.js"
+      crossorigin="anonymous"
+    ></script>
+
     <link
       rel="stylesheet"
       type="text/css"
@@ -29,28 +30,32 @@
                 src=" {{ url_for('static', filename='img/' + crypto + '.png') }}"
                 alt=""
               />
-              <p>{{currentName}}</p>
+
+              <p
+                ><span class="blank">d </span> {{currentName}}
+                <span class="blank">d </span></p
+              >
               <p>(</p>
               <div class="dropdown">
                 <div class="dropdown-select">
-                  <span class="select">Choose</span>
+                  <span class="select"> Choose</span>
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
                   <a href="/USD/{{crypto[: -3]}}USD/7d" class="a-list">
-                    <div class="dropdown-list__item">{{crypto[: -3]}}USD</div>
+                    <div class="dropdown-list__item">USD</div>
                   </a>
                   <a href="/PLN/{{crypto[: -3]}}USD/7d" class="a-list">
-                    <div class="dropdown-list__item">{{crypto[: -3]}}PLN</div>
+                    <div class="dropdown-list__item">PLN</div>
                   </a>
                   <a href="/EUR/{{crypto[: -3]}}USD/7d" class="a-list">
-                    <div class="dropdown-list__item">{{crypto[: -3]}}EUR</div>
+                    <div class="dropdown-list__item">EUR</div>
                   </a>
                   <a href="/GBP/{{crypto[: -3]}}USD/7d" class="a-list">
-                    <div class="dropdown-list__item">{{crypto[: -3]}}GBP</div>
+                    <div class="dropdown-list__item">GBP</div>
                   </a>
                   <a href="/CHF/{{crypto[: -3]}}USD/7d" class="a-list">
-                    <div class="dropdown-list__item">{{crypto[: -3]}}CHF</div>
+                    <div class="dropdown-list__item">CHF</div>
                   </a>
                 </div>
               </div>
@@ -111,6 +116,20 @@
               var graphs = {{graphJSON | safe}};
               Plotly.plot('bargraph',graphs,{});
             </script>
+            <div class="days">
+              <a href="7d">
+                <p>7d</p>
+              </a>
+              <a href="6m">
+                <p>6m</p>
+              </a>
+              <a href="1y">
+                <p>1y</p>
+              </a>
+              <a href="5y">
+                <p>5y</p>
+              </a>
+            </div>
           </div>
           <div class="container">
             <div class="exchange"></div>

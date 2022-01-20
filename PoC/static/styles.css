@@ -109,7 +109,16 @@
 .box-one p {
   padding-top: 5px;
 }
-
+.fa-bitcoin {
+  font-size: 40px;
+  color: #f7931a;
+  background-color: #fff;
+  border-radius: 30px;
+}
+.blank {
+  font-size: 10px;
+  color: #312929;
+}
 .box-two {
   display: flex;
   align-self: center;
@@ -199,14 +208,29 @@
 }
 .chart {
   width: 56vw;
-  height: 50vh;
+  height: 48vh;
   margin: 0 auto;
+}
+
+.days {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center;
+  width: 56vw;
+
+  background-color: #312929;
+  padding-bottom: 30px;
+}
+.days p {
+  width: 60px;
+  color: #eee4e4;
 }
 
 .container {
   width: 56vw;
-  height: 27.5vh;
-  margin: 2vw auto;
+  height: 23vh;
+  margin: 5vw auto;
 
   display: flex;
 }
