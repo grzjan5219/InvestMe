@@ -1,10 +1,16 @@
-import yfinance as yf
+from api import *
+import datetime
 
-def to_percentage(crypto):
-    data = yf.download(tickers=f'{crypto}', period='2d', interval='1d')
-    a = data.Open
-    prices = list(a)
+today = datetime.date.today()
+delta = datetime.timedelta(days=1)
+yesterday = today - delta
 
-    for a, b in zip(prices[::1], prices[1::1]):
-        percentage = 100 * (b - a) / a
+def to_percentage(crp):
+    prices = []
+    x = getCrypto(crp, yesterday, today)
+    for keys, values in x["Open"].items():
+        prices.append(round(values,2))
+
+    percentage = (prices[1] - prices[0]) / prices[0] * 100
+
     return round(percentage, 2)

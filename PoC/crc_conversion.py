@@ -1,10 +1,15 @@
-import yfinance as yf
-from currency_converter import CurrencyConverter
+from api import *
+import datetime
 
-def get(crypto, currency):
-    data = yf.download(tickers=f'{crypto}', period='1d', interval='1d')
-    b = list(data.Open)
-    pricee = round(b[0], 1)
-    c = CurrencyConverter()
+today = datetime.date.today()
 
-    return round(c.convert(pricee, 'USD', currency), 1)
+
+def get(crp, currency):
+    x = getCrypto(crp, today, today)
+    for keys, values in x["Open"].items():
+        pricee = values
+
+    url = 'https://api.exchangerate-api.com/v4/latest/USD'
+    c = RealTimeCurrencyConverter(url)
+
+    return round(c.convert("USD", currency, pricee), 2)

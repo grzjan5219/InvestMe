@@ -6,7 +6,7 @@ from api import *
 from chart import *
 from percent import *
 from crc_conversion import *
-
+from createFrontData import *
 app = Flask(__name__)
 
 
@@ -21,34 +21,20 @@ def home1(currency, crypto, time):
     fig = getGraph(currency, crypto, time)
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
-    # get currency price
-    currentPrice = get(crypto, currency)
-    # # get currency Procentage
-    currentProcentage = to_percentage(crypto)
-
-    if crypto == 'ETH-USD':
-        currentName = 'Ethereum'
-    elif crypto == 'BTC-USD':
-        currentName = 'Bitcoin'
-
-    cryptos = [
+    # list with data abaout current cryptocurrency to display
+    currentData = [
         {
-            'name': 'ETH-USD',
-            'price': get('ETH-USD', currency),
-            'img': "{{url_for('static', filename='img/ETH-USD')}",
-            'percentage': float(to_percentage('ETH-USD'))
-
-        },
-        {
-            'name': 'BTC-USD',
-            'price': get('BTC-USD', currency),
-            'img': "{{url_for('static', filename='img/BTC-USD')}",
-            'percentage': float(to_percentage('BTC-USD'))
-
-        },
+            'currentSymbol': CurrencySymbols.get_symbol(currency),
+            'currentName': currentNameFunc(crypto, currency),
+            'currentPrice':  round(get(crypto, currency), 1),
+            'currentProcentage': to_percentage(crypto)
+        }
     ]
 
-    return render_template("crypto.html", currentPrice=currentPrice, cryptos=cryptos, crypto=crypto, currentProcentage=currentProcentage, graphJSON=graphJSON, currentName=currentName)
+    # list with cryptocurrencies data to display
+    cryptos = addToList(currency)
+
+    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency)
 
 
 if __name__ == '__main__':

@@ -32,7 +32,8 @@
               />
 
               <p
-                ><span class="blank">d </span> {{currentName}}
+                ><span class="blank">d </span> {{currentData[0].currentName}}
+
                 <span class="blank">d </span></p
               >
               <p>(</p>
@@ -42,19 +43,19 @@
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
-                  <a href="/USD/{{crypto[: -3]}}USD/7d" class="a-list">
+                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}" class="a-list">
                     <div class="dropdown-list__item">USD</div>
                   </a>
-                  <a href="/PLN/{{crypto[: -3]}}USD/7d" class="a-list">
+                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}" class="a-list">
                     <div class="dropdown-list__item">PLN</div>
                   </a>
-                  <a href="/EUR/{{crypto[: -3]}}USD/7d" class="a-list">
+                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}" class="a-list">
                     <div class="dropdown-list__item">EUR</div>
                   </a>
-                  <a href="/GBP/{{crypto[: -3]}}USD/7d" class="a-list">
+                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}" class="a-list">
                     <div class="dropdown-list__item">GBP</div>
                   </a>
-                  <a href="/CHF/{{crypto[: -3]}}USD/7d" class="a-list">
+                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}" class="a-list">
                     <div class="dropdown-list__item">CHF</div>
                   </a>
                 </div>
@@ -62,10 +63,13 @@
               <p>)</p>
             </div>
             <div class="box-two">
-              <p class="price">{{currentPrice}}</p>
-              <p class="procent">{{currentProcentage}}%</p>
+              <p class="price"
+                >{{currentData[0].currentPrice}}
+                {{currentData[0].currentSymbol}}</p
+              >
+              <p class="procent">{{currentData[0].currentProcentage}}%</p>
 
-              {% if currentProcentage >= 0 %}
+              {% if currentData[0].currentProcentage >= 0 %}
               <img
                 class="logo-arrow"
                 src=" {{ url_for('static', filename='img/arr_up.png') }}"
@@ -83,13 +87,14 @@
             <p class="currency-title">Cryptocurrencies </p>
             <div class="currency-container">
               {% for el in cryptos %}
-              <a href="/PLN/{{el.name}}/7d">
+              <!-- <a href="/{{el.currency}}/{{el.name}}/{{time}}"> -->
+              <a href="/{{currency}}/{{el.name}}/{{time}}">
                 <div class="crypto">
                   <img
                     class="crypto_logo"
                     src="{{ url_for('static', filename='img/' + el.name + '.png') }}"
                   />
-                  <p class="crypto-price">{{el.price}}</p>
+                  <p class="crypto-price">{{el.price}}{{el.symbol}}</p>
                   <p class="crypto-procent">{{el.percentage}}%</p>
                   {% if el.percentage >= 0 %}
                   <img
@@ -119,6 +124,9 @@
             <div class="days">
               <a href="7d">
                 <p>7d</p>
+              </a>
+              <a href="1m">
+                <p>1m</p>
               </a>
               <a href="6m">
                 <p>6m</p>
