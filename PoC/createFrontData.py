@@ -13,6 +13,10 @@ def currentNameFunc(crypto, currency):
         currentName = 'Binance Coin'
     elif crypto == 'DOGE-USD':
         currentName = 'Dogecoin'
+    elif crypto == "USDT-USD":
+        currentName = 'Tether USD'
+    elif crypto == 'SOL1-USD':
+        currentName = 'Solana USD'
     return currentName
 
 
@@ -33,5 +37,7 @@ def addToList(currency):
     cryptos.extend((createDictCryptos('BTC-USD', currency),
                     createDictCryptos('ETH-USD', currency),
                     createDictCryptos('BNB-USD', currency),
-                    createDictCryptos('DOGE-USD', currency)))
+                    createDictCryptos('DOGE-USD', currency),
+                    createDictCryptos('USDT-USD', currency),
+                    createDictCryptos('SOL1-USD', currency)))
     return cryptos

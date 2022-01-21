@@ -27,7 +27,7 @@ def getCrypto(crp, data_start, data_end):
     crphistory = pdr.get_data_yahoo(crp, start=data_start, end=data_end)
     return crphistory
 
-def exchange(crp, data_start, data_end, currency):
+def exchange(crp, data_start, data_end, currency, interval=1):
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
     converter = RealTimeCurrencyConverter(url)
     df = getCrypto(crp, data_start, data_end)
@@ -44,7 +44,7 @@ def exchange(crp, data_start, data_end, currency):
 
     lista_calosc = {"Date" : [], "Open" : [], "High" : [], "Low" : [], "Close" : []}
     data = start
-    for i in range(days.days):  
+    for i in range(1, days.days, interval):  
         lista_calosc["Date"].append(str(data)[:10])
         lista_calosc["Open"].append(converter.convert("USD", f'{currency}', df["Open"][i]))
         lista_calosc["High"].append(converter.convert("USD", f'{currency}', df["High"][i]))
