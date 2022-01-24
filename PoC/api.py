@@ -51,4 +51,16 @@ def exchange(crp, data_start, data_end, currency, interval=1):
         lista_calosc["Low"].append(converter.convert("USD", f'{currency}', df["Low"][i]))
         lista_calosc["Close"].append(converter.convert("USD", f'{currency}', df["Close"][i]))
         data += delta
-    return lista_calosc 
+    tydzien = []
+    for i in range(3):
+        tydzien.append(lista_calosc["Open"][-i])
+    tydzien_2 = []
+    for i in range(3, 6):
+        tydzien_2.append(lista_calosc["Open"][-i])
+    if sum(tydzien)/len(tydzien) > sum(tydzien_2)/len(tydzien):
+        lista_calosc["Trend"] = "Up"
+    elif sum(tydzien)/ len(tydzien) == sum(tydzien_2)/len(tydzien):
+        lista_calosc["Trend"] = "Flat"
+    else: 
+        lista_calosc["Trend"] = "Down"
+    return lista_calosc
