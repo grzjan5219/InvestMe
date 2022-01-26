@@ -16,3 +16,22 @@ Flask or Django? The framework of choice, after considering the requirements, ne
 
 Library used to generate graphs:
 There are a few libraries in Python, that could be used to create a graph like required by our application. Although many meet the requirements, not many are interactive and can show you data upon "hovering" over the part of interest. Exactly for this reason it was decided that the best choice would be 'plotly'. The library has great graph-drawing capabilities and is interactive which was our deciding factor while chosing.
+
+########## Setup ###########
+
+This project uses many various libraries supplied by the python community. Libraries used are:
+
+Flask - The main library used by the project to run the application. Without it the app simply wouldn't work.
+yfinance - The YahooFinance API that is responsible for getting the required data to the application.
+pandas - A Data management API used for reading and managing data.
+pandas_datareader - A pandas relative library, used for improving the managing part of pandas.
+requests - A built-in Python module, used for getting the data from the API.
+datetime - A bult-in Python module, that is rather self-explanatory - used for getting data about time and date.
+currency-symbols - A library used as the name advises - for getting currency symbols.
+plotly - The library responsible for drawing the graph of the application, that represents the collected data.
+json - A built-in Python module, used for file conversion, to make the data usable by graph-drawing library.
+
+All the required modules required to run the application can be installed by the executable file that comes included. 
+It is named: ' import_modules.py '
+
+########## Setup ###########
