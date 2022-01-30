@@ -1,0 +1,157 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+}
+body {
+  background-color: #333333;
+}
+header {
+  min-height: 90vh;
+  position: relative;
+}
+.header p {
+  position: absolute;
+  left: 50%;
+  top: 3%;
+  color: #eee4e4;
+  font-size: 28px;
+  transform: translate(-50%);
+}
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 96%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.header-text {
+  position: absolute;
+  left: 10%;
+  top: 30%;
+  width: 50vw;
+}
+
+.header-text h1,
+.header-text h2 {
+  color: #eee4e4;
+}
+
+.header-text h1 {
+  font-size: 62px;
+  font-weight: 500;
+}
+
+.header-text h1 br {
+  content: '';
+  margin: -20px;
+  display: block;
+}
+.header-text h2 {
+  font-size: 30px;
+  font-weight: 100;
+  margin: 20px 0;
+}
+
+.header-btn {
+  width: 160px;
+  height: 50px;
+  border: none;
+  background-color: #a35adb;
+  color: #eee4e4;
+  border-radius: 40px;
+}
+
+/* CRYPTO SECTION START */
+section {
+}
+
+.section-title {
+  font-size: 46px;
+  position: absolute;
+  color: #eee4e4;
+  font-size: 40px;
+  transform: translate(-50%);
+  top: 0;
+  left: 50%;
+}
+
+.crypto-setcion {
+  padding-top: 10vh;
+  z-index: 1;
+  position: relative;
+}
+
+.crypto-contaiener {
+  display: flex;
+  width: 72vw;
+  justify-content: space-around;
+  margin: 0 auto;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.crypto-box {
+  /* display: flex; */
+  padding-top: 50px;
+  text-align: center;
+  width: 16vw;
+  height: 32vh;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  background-color: #312929;
+}
+
+.crypto-box img {
+  width: 30%;
+}
+
+.symbol,
+.price,
+.procent {
+  color: #eee4e4;
+  margin-top: 16px;
+}
+
+.symbol {
+  font-size: 46px;
+  color: #eee4e4;
+  font-family: 900;
+}
+.price {
+  font-size: 36px;
+}
+.procent {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+.procent p {
+  color: #eee4e4;
+  font-size: 26px;
+  font-family: 200;
+}
+.procent img {
+  width: 20px;
+}
+
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6vh;
+  width: 100%;
+  height: 10vh;
+  background-color: #312929;
+}
+.foot p {
+  font-size: 20px;
+  color: #eee4e4;
+}
+
+/* CRYPTO SECTION END  */
