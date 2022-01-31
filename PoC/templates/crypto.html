@@ -5,22 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script
-      src="https://kit.fontawesome.com/0c1bcce4d4.js"
-      crossorigin="anonymous"
-    ></script>
-
     <link
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static',filename='styles.css') }}"
     />
+    <script src="{{url_for('static', filename='script.js')}}" defer></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/0c1bcce4d4.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <main class="main">
-      <p class="title">CryptoMarket</p>
+      <a href="/">
+        <p class="title">Crypto<span style="color: #a35adb">Market</span></p>
+      </a>
       <div class="flex-container">
         <div class="left">
           <div class="currency-price">
@@ -43,19 +45,19 @@
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
-                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}" class="a-list">
+                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">USD</div>
                   </a>
-                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}" class="a-list">
+                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">PLN</div>
                   </a>
-                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}" class="a-list">
+                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">EUR</div>
                   </a>
-                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}" class="a-list">
+                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">GBP</div>
                   </a>
-                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}" class="a-list">
+                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">CHF</div>
                   </a>
                 </div>
@@ -116,38 +118,101 @@
           </div>
         </div>
         <div class="right">
+          <div class="period">
+              <div class="dropdown">
+                <div class="dropdown-select">
+                  <span class="select"> Period</span>
+                  <i class="fa fa-caret-down icon"></i>
+                </div>
+                  <div class="dropdown-list">
+                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                    <div class="dropdown-list__item">USD</div>
+                  </a>
+                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                    <div class="dropdown-list__item">PLN</div>
+                  </a>
+                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                    <div class="dropdown-list__item">EUR</div>
+                  </a>
+                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}{{interval}}/" class="a-list">
+                    <div class="dropdown-list__item">GBP</div>
+                  </a>
+                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                    <div class="dropdown-list__item">CHF</div>
+                  </a>
+                </div>
+              </div>
+          </div>
           <div class="chart" id="bargraph">
             <script type="text/javascript">
               var graphs = {{graphJSON | safe}};
               Plotly.plot('bargraph',graphs,{});
             </script>
             <div class="days">
-              <a href="max">
+              <a href="/{{currency}}/{{crypto}}/max/{{interval}}">
                 <p>max</p>
               </a>
-              <a href="5y">
-                <p>5y</p>
-              </a>
-              <a href="1y">
+              <a href="/{{currency}}/{{crypto}}/1y/{{interval}}">
                 <p>1y</p>
               </a>
-              <a href="6m">
+              <a href="/{{currency}}/{{crypto}}/6m/{{interval}}">
                 <p>6m</p>
               </a>
-              <a href="1m">
+              <a href="/{{currency}}/{{crypto}}/1m/{{interval}}">
                 <p>1m</p>
               </a>
-              <a href="7d">
+              <a href="/{{currency}}/{{crypto}}/7d/{{interval}}">
                 <p>7d</p>
               </a>
             </div>
           </div>
           <div class="container">
-            <div class="exchange"></div>
+            <div class="exchange">
+              <p class="get-table" style="font-size: 0">{{result}}</p>
+            </div>
             <div class="cos"></div>
           </div>
         </div>
       </div>
     </main>
+    <div>
+      <div class="bottom">
+        <div class="predict">
+          {% if prediction == "Down trend" %}
+          <p class="predict-text"
+            >The trend is
+            <span class="text-color" style="color: red">low</span>, It's good
+            time to sell crypto.
+          </p>
+          {% elif prediction == "Up trend" %}
+          <p class="predict-text"
+            >The trend is
+            <span class="text-color" style="color: green">Up</span>, It's good
+            time to buy crypto.
+          </p>
+          {% elif prediction == "Flat trend" %}
+          <p class="predict-text"
+            >The trend is
+            <span class="text-color" style="color: green">Flat</span>, Hold
+            cryptocurrencies. {% endif %}
+          </p></div
+        >
+
+        <div class="curr-converter">
+          <div class="curr">
+            <p>{{crypto}}</p> <span></span>
+            <input class="curr-price" type="number" />
+          </div>
+
+          <img src="{{ url_for('static', filename='img/equal.PNG') }}" />
+          <div class="curr">
+            <p>{{currency}}</p> <span> </span>
+            <div class="exchange-output"> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="foot"><p>Cryptomarket ©</p></footer>
   </body>
 </html>

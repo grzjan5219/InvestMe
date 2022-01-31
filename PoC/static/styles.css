@@ -6,8 +6,11 @@
   box-sizing: 0;
   font-family: 'Poppins', sans-serif;
   text-decoration: none;
+  /* background-color: #333333; */
 }
-
+body {
+  background-color: #333333;
+}
 .main {
   height: 100vh;
   background-color: #333333;
@@ -19,6 +22,7 @@
 }
 .dropdown:hover .dropdown-list {
   opacity: 1;
+  border-radius: 10px;
   visibility: visible;
 }
 .dropdown-select {
@@ -68,7 +72,7 @@
   font-size: 20px;
   color: white;
   text-align: center;
-  margin-bottom: 7vh;
+  margin: 4vh 0;
 }
 
 .flex-container {
@@ -133,7 +137,7 @@
 
 .box-two .price {
   color: #eee4e4;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
 }
 
@@ -150,6 +154,8 @@
   width: 25vw;
 
   height: 61vh;
+  overflow: scroll;
+  overflow-x: hidden;
   /* height: 58.5vh; */
 }
 .logo-arrow {
@@ -179,22 +185,41 @@
 
 .crypto {
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: space-between;
   margin: 0 auto;
   width: 20vw;
-  padding-bottom: 20px;
+  padding: 10px 0;
 }
 
 .crypto .crypto-price {
+  width: 100px;
+  text-align: left;
   font-size: 24px;
   font-weight: 800;
   color: #eee4e4;
+}
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(92, 83, 83);
+  border-radius: 10px;
 }
 
 .crypto .crypto-procent {
   font-size: 17px;
   font-weight: 500;
+  width: 60px;
+  text-align: left;
   color: #eee4e4;
 }
 
@@ -222,6 +247,23 @@
   background-color: #312929;
   padding-bottom: 30px;
 }
+.period {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  width: 56vw;
+  text-align: left;
+  background-color: #312929;
+  padding-bottom: 5px;
+  padding-top: 30px;
+}
+
+.period p {
+  width: 60px;
+  color: #eee4e4;
+}
+
+
 .days p {
   width: 60px;
   color: #eee4e4;
@@ -250,7 +292,9 @@
   }
 
   .chart,
-  .container {
+  .container,
+  table,
+  .days {
     width: 50vw;
   }
 }
@@ -344,4 +388,124 @@
   .currency-container {
     height: 0vh;
   }
+}
+
+.container {
+  /* height: 120px; */
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+table {
+  width: 55vw;
+  text-align: center;
+  color: #ddd2d2;
+  border: none;
+  padding: 0;
+}
+
+th {
+  text-align: center;
+  /* border: 2px solid rgb(230, 184, 184); */
+  padding: 0;
+}
+
+td {
+  padding: 0;
+}
+
+.crypto:hover {
+  background-color: #54a9de;
+  transition: 0.3s;
+}
+
+.bottom {
+  display: flex;
+  width: 87.5vw;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.predict {
+  background-color: #312929;
+  width: 38vw;
+  height: 14vh;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.predict-text {
+  font-weight: 500;
+  font-size: 28px;
+  color: #eee4e4;
+  text-align: center;
+}
+
+.text-color {
+  color: #ff0000;
+}
+
+.curr-converter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45vw;
+  border-radius: 10px;
+  background-color: #312929;
+}
+.curr-converter img {
+  width: 60px;
+  margin: 0 1vw;
+}
+
+.curr {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border: 1px solid #eee4e4;
+  border-radius: 20px;
+}
+
+.curr p {
+  font-size: 30px;
+  color: #7d4a4a;
+}
+
+.curr input {
+  background-color: transparent;
+  color: #eee4e4;
+  border: none;
+  /* font-size: 20px; */
+  width: 6vw;
+  height: 40px;
+}
+.curr span {
+  font-size: 40px;
+  background-color: #707070;
+  width: 1px;
+  margin: 0 20px;
+  height: 40px;
+}
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6vh;
+  width: 100%;
+  height: 10vh;
+  background-color: #312929;
+}
+.foot p {
+  font-size: 20px;
+  color: #eee4e4;
+}
+.exchange-output {
+  width: 100px;
+  font-size: 20px;
+  color: #eee4e4;
+}
+
+.curr-price {
+  font-size: 20px;
 }

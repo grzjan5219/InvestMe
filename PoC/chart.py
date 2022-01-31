@@ -14,7 +14,7 @@ crypto_release = {
     "USDT-USD" : "2017-11-10"
 }
 
-def getGraph(currency, crypto, time):
+def getGraph(currency, crypto, time, interval):
     stopDelta = False
     if (time == "5y"):
         delta = datetime.timedelta(days=365) * 5
@@ -30,7 +30,7 @@ def getGraph(currency, crypto, time):
     if stopDelta == False:
         data_pocz = str(datetime.datetime.now() - delta)[:10]
     try:
-        df = exchange(crypto, data_pocz, now, currency)
+        df = exchange(crypto, data_pocz, now, currency, interval)
     except IndexError as e:
         print(str(e))
         delta = datetime.timedelta(days=7)

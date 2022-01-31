@@ -1,9 +1,70 @@
-<html lang="pl">
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title> Strona główna </title>
     <meta charset="UTF-8" />
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static',filename='main.css') }}"
+    />
   </head>
-  <body> </body>
+  <body>
+    <header class="header">
+      <p>Crypto<span style="color: #a35adb">Market</span></p>
+      <video class="video-container" muted autoplay loop>
+        <source
+          src="{{ url_for('static', filename='img/video.mp4') }}"
+          type="video/mp4"
+        />
+      </video>
+      <div class="header-text">
+        <h1
+          >Immerse yourself <br />
+          in the cryptocurrencies</h1
+        >
+        <h2
+          >get information about the most popular <br />
+          cryptocurrencies</h2
+        >
+        <button class="header-btn">Check</button>
+      </div>
+    </header>
+
+    <section class="crypto-section">
+      <h1 class="section-title">Discover the cryptocurrencies</h1>
+      <div class="crypto-contaiener">
+        {% for el in cryptos %}
+        <a href="/USD/{{el.name}}/7d/1">
+          <div class="crypto-box">
+            <img
+              src="{{ url_for('static', filename='img/' + el.name + '.png') }}"
+            />
+            <p class="symbol">{{el.name[:3]}}</p>
+            <p class="price">{{el.price}} {{el.symbol}}</p>
+            <div class="procent">
+              <p>{{el.percentage}}%</p>
+              {% if el.percentage >= 0 %}
+              <img
+                class="logo-arrow"
+                src=" {{ url_for('static', filename='img/arr_up.png') }}"
+                alt=""
+              />
+              {% else %}
+              <img
+                class="logo-arrow"
+                src=" {{ url_for('static', filename='img/arr_down.png') }}"
+              />
+              {% endif %}
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer class="foot"><p>Cryptomarket ©</p></footer>
+  </body>
 </html>

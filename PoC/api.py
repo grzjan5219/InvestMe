@@ -4,28 +4,33 @@ import requests
 import datetime
 from pandas_datareader import data as pdr
 
+
 class RealTimeCurrencyConverter():
-    def __init__(self,url):
-        self.data= requests.get(url).json()
+    def __init__(self, url):
+        self.data = requests.get(url).json()
         self.currencies = self.data['rates']
 
-    def convert(self, from_currency, to_currency, amount): 
-        initial_amount = amount 
-        #first convert it into USD if it is not in USD.
+    def convert(self, from_currency, to_currency, amount):
+        initial_amount = amount
+        # first convert it into USD if it is not in USD.
         # because our base currency is USD
-        if from_currency != 'USD' : 
-          amount = amount / self.currencies[from_currency] 
-  
-        # limiting the precision to 4 decimal places 
-        amount = round(amount * self.currencies[to_currency], 4) 
+        if from_currency != 'USD':
+            amount = amount / self.currencies[from_currency]
+
+        # limiting the precision to 4 decimal places
+        amount = round(amount * self.currencies[to_currency], 4)
         return amount
+
 
 yf.pdr_override()
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
+
 def getCrypto(crp, data_start, data_end):
     crphistory = pdr.get_data_yahoo(crp, start=data_start, end=data_end)
+
     return crphistory
+
 
 def exchange(crp, data_start, data_end, currency, interval=1):
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
@@ -39,17 +44,23 @@ def exchange(crp, data_start, data_end, currency, interval=1):
     end = datetime.datetime.strptime(data_end, format)
     delta = datetime.timedelta(days=1)
     days = end - start
-    
+
     start -= delta
 
-    lista_calosc = {"Date" : [], "Open" : [], "High" : [], "Low" : [], "Close" : []}
+    lista_calosc = {"Date": [], "Open": [], "High": [], "Low": [], "Close": []}
     data = start
-    for i in range(1, days.days, interval):  
+    if int(interval) > int(days.days):
+        interval = 1
+    for i in range(1, days.days, int(interval)):
         lista_calosc["Date"].append(str(data)[:10])
-        lista_calosc["Open"].append(converter.convert("USD", f'{currency}', df["Open"][i]))
-        lista_calosc["High"].append(converter.convert("USD", f'{currency}', df["High"][i]))
-        lista_calosc["Low"].append(converter.convert("USD", f'{currency}', df["Low"][i]))
-        lista_calosc["Close"].append(converter.convert("USD", f'{currency}', df["Close"][i]))
+        lista_calosc["Open"].append(converter.convert(
+            "USD", f'{currency}', df["Open"][i]))
+        lista_calosc["High"].append(converter.convert(
+            "USD", f'{currency}', df["High"][i]))
+        lista_calosc["Low"].append(converter.convert(
+            "USD", f'{currency}', df["Low"][i]))
+        lista_calosc["Close"].append(converter.convert(
+            "USD", f'{currency}', df["Close"][i]))
         data += delta
     tydzien = []
     for i in range(3):
@@ -61,6 +72,6 @@ def exchange(crp, data_start, data_end, currency, interval=1):
         lista_calosc["Trend"] = "Up"
     elif sum(tydzien)/ len(tydzien) == sum(tydzien_2)/len(tydzien):
         lista_calosc["Trend"] = "Flat"
-    else: 
+    else:
         lista_calosc["Trend"] = "Down"
     return lista_calosc
