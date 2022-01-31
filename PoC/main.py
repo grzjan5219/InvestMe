@@ -1,12 +1,14 @@
 from flask import Flask, render_template
 import plotly
 import json
+import pandas as pd
 
 from api import *
 from chart import *
 from percent import *
 from crc_conversion import *
 from createFrontData import *
+import datetime
 app = Flask(__name__)
 
 cryptos = addToList("USD")
@@ -36,15 +38,16 @@ def home1(currency, crypto, time, interval):
         }
     ]
 
-    prediction = predict(crypto, currency)
 
     # list with cryptocurrencies data to display
     cryptos = addToList(currency)
 
-    x = getCrypto(crypto, '2022-01-01', today)
+    tydzien = str(datetime.datetime.now() - datetime.timedelta(days=14))[:10]
+    x = getCrypto(crypto, tydzien, today) 
+    trend = exchange(crypto, data_start=tydzien, data_end=now, currency=currency)["Trend"]
+    x = x.reset_index(drop=True)
     result = x.to_html()
-
-    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=prediction, interval=interval)
+    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=trend, interval=interval)
 
 
 if __name__ == '__main__':

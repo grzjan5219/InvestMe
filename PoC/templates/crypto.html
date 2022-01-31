@@ -45,34 +45,19 @@
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
-                  <a
-                    href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/"
-                    class="a-list"
-                  >
+                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">USD</div>
                   </a>
-                  <a
-                    href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/"
-                    class="a-list"
-                  >
+                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">PLN</div>
                   </a>
-                  <a
-                    href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/"
-                    class="a-list"
-                  >
+                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">EUR</div>
                   </a>
-                  <a
-                    href="/GBP/{{crypto[: -3]}}USD/{{time}}{{interval}}/"
-                    class="a-list"
-                  >
+                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">GBP</div>
                   </a>
-                  <a
-                    href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/"
-                    class="a-list"
-                  >
+                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
                     <div class="dropdown-list__item">CHF</div>
                   </a>
                 </div>
@@ -105,8 +90,7 @@
             <div class="currency-container">
               {% for el in cryptos %}
               <!-- <a href="/{{el.currency}}/{{el.name}}/{{time}}"> -->
-
-              <a href="/{{currency}}/{{crypto}}/{{time}}/{{interval}}">
+              <a href="/{{currency}}/{{el.name}}/{{time}}">
                 <div class="crypto">
                   <img
                     class="crypto_logo"
@@ -135,29 +119,32 @@
         </div>
         <div class="right">
           <div class="period">
-            <div class="dropdown">
-              <div class="dropdown-select">
-                <span class="select"> Period</span>
-                <i class="fa fa-caret-down icon"></i>
+              <div class="dropdown">
+                <div class="dropdown-select">
+                  <span class="select"> Period</span>
+                  <i class="fa fa-caret-down icon"></i>
+                </div>
+                <div class="dropdown-list">
+                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/1/" class="a-list">
+                    <div class="dropdown-listitem">1 day</div>
+                  </a>
+                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/2/" class="a-list">
+                    <div class="dropdown-listitem">2 days</div>
+                  </a>
+                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/5/" class="a-list">
+                    <div class="dropdown-listitem">5 days</div>
+                  </a>
+                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}/10/" class="a-list">
+                    <div class="dropdown-listitem">10 days</div>
+                  </a>
+                  <a
+                    href="/CHF/{{crypto[: -3]}}USD/{{time}}/30/"
+                    class="a-list"
+                  >
+                    <div class="dropdown-list__item">30 days</div>
+                  </a>
+                </div>
               </div>
-              <div class="dropdown-list">
-                <a href="/USD/{{crypto[: -3]}}USD/{{time}}/1/" class="a-list">
-                  <div class="dropdown-list__item">1 day</div>
-                </a>
-                <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/2/" class="a-list">
-                  <div class="dropdown-list__item">2 days</div>
-                </a>
-                <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/5/" class="a-list">
-                  <div class="dropdown-list__item">5 days</div>
-                </a>
-                <a href="/GBP/{{crypto[: -3]}}USD/{{time}}/10/" class="a-list">
-                  <div class="dropdown-list__item">10 days</div>
-                </a>
-                <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/30/" class="a-list">
-                  <div class="dropdown-list__item">30 days</div>
-                </a>
-              </div>
-            </div>
           </div>
           <div class="chart" id="bargraph">
             <script type="text/javascript">

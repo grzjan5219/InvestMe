@@ -37,6 +37,13 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
+th{
+  border: none;
+  text-align: left;
+}
+td{
+  border: none;
+}
 .dropdown-list {
   border-radius: 4px;
   background-color: #312929;
@@ -263,6 +270,7 @@ body {
   width: 60px;
   color: #eee4e4;
 }
+
 
 .days p {
   width: 60px;
