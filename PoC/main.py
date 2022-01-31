@@ -23,7 +23,7 @@ def home():
 @ app.route('/<currency>/<crypto>/<time>/<interval>/')
 def home1(currency, crypto, time, interval):
     # get graph
-    fig = getGraph(currency, crypto, time, interval)
+    fig = getGraph(currency, crypto, time, interval)[0]
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     # list with data abaout current cryptocurrency to display
@@ -41,13 +41,12 @@ def home1(currency, crypto, time, interval):
 
     # list with cryptocurrencies data to display
     cryptos = addToList(currency)
-
     tydzien = str(datetime.datetime.now() - datetime.timedelta(days=14))[:10]
-    x = getCrypto(crypto, tydzien, today) 
-    trend = exchange(crypto, data_start=tydzien, data_end=now, currency=currency)["Trend"]
-    x = x.reset_index(drop=True)
+    data_pocz = getGraph(currency, crypto, time, interval)[1]
+    x = getCrypto(crypto, data_pocz,  today, interval) 
+    # trend = exchange(crypto, data_start=tydzien, data_end=now, currency=currency)["Trend"]
     result = x.to_html()
-    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=trend, interval=interval)
+    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=None, interval=interval)
 
 
 if __name__ == '__main__':
