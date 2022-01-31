@@ -77,19 +77,3 @@ def addToList(currency):
                    createDictCryptos('DOGE-USD', currency)
                     ))
     return cryptos
-
-
-def predict(crypto, currency):
-    timeline = exchange(crypto, '2022-01-01', '2022-01-27', currency)
-    tydzien = []
-    for i in range(3):
-        tydzien.append(timeline["Open"][-i])
-    tydzien_2 = []
-    for i in range(3, 6):
-        tydzien_2.append(timeline["Open"][-i])
-    if sum(tydzien)/len(tydzien) > sum(tydzien_2)/len(tydzien_2):
-        return("Up trend")
-    elif sum(tydzien)/len(tydzien) == sum(tydzien_2)/len(tydzien_2):
-        return("Flat trend")
-    else:
-        return("Down trend")

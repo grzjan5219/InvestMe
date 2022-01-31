@@ -22,6 +22,8 @@ def getGraph(currency, crypto, time, interval):
         delta = datetime.timedelta(days=365)
     elif (time == "6m"):
         delta = datetime.timedelta(days=182)
+    elif (time == "1m"):
+        delta = datetime.timedelta(days=30)
     elif (time == "7d"):
         delta = datetime.timedelta(days=7)
     elif (time == "max"):

@@ -37,6 +37,13 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
+th{
+  border: none;
+  text-align: left;
+}
+td{
+  border: none;
+}
 .dropdown-list {
   border-radius: 4px;
   background-color: #312929;
@@ -49,6 +56,7 @@ body {
   visibility: hidden;
   transition: opacity 0.2s linear, visibility 0.2s linear;
   transform: translateY(10px);
+  z-index: 10;
 }
 .dropdown-list a {
   color: #eee4e4;
