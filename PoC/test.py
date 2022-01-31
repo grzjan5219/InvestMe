@@ -6,7 +6,7 @@ from createFrontData import *
 
 
 def test1():
-    """Test 1: Testowanie trendu kryptowalut """
+    """Test 1: Testing the output of trends """
     x = predict('BTC-USD', 'PLN')
     if x == "Up trend" or "Flat trend" or "Down trend":
         assert True
