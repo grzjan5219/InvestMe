@@ -49,6 +49,7 @@ body {
   visibility: hidden;
   transition: opacity 0.2s linear, visibility 0.2s linear;
   transform: translateY(10px);
+  z-index: 10;
 }
 .dropdown-list a {
   color: #eee4e4;
@@ -262,7 +263,6 @@ body {
   width: 60px;
   color: #eee4e4;
 }
-
 
 .days p {
   width: 60px;

@@ -70,11 +70,12 @@ def addToList(currency):
     cryptos.extend((createDictCryptos('BTC-USD', currency),
                    createDictCryptos('ETH-USD', currency),
                    createDictCryptos('BNB-USD', currency),
-                    createDictCryptos('SOL-USD', currency),
                     createDictCryptos('AVAX-USD', currency),
                     createDictCryptos('LINK-USD', currency),
                     createDictCryptos('USDT-USD', currency),
-                   createDictCryptos('DOGE-USD', currency)
+                   createDictCryptos('DOGE-USD', currency),
+                   createDictCryptos('SOL-USD', currency)
+
                     ))
     return cryptos
 
