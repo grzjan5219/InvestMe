@@ -3,7 +3,6 @@ from currency_converter import CurrencyConverter
 import yfinance as yf
 from api import *
 import datetime
-from percent import *
 today = datetime.date.today()
 
 
@@ -12,8 +11,8 @@ def currentNameFunc(crypto, currency):
         currentName = 'Ethereum'
     elif crypto == 'BTC-USD':
         currentName = 'Bitcoin'
-    # elif crypto == 'BNB-USD':
-    #     currentName = 'Binance Coin'
+    elif crypto == 'BNB-USD':
+        currentName = 'Binance Coin'
     elif crypto == 'DOGE-USD':
         currentName = 'Dogecoin'
     elif crypto == "USDT-USD":

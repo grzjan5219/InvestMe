@@ -5,8 +5,6 @@ import pandas as pd
 
 from api import *
 from chart import *
-from percent import *
-from crc_conversion import *
 from createFrontData import *
 import datetime
 app = Flask(__name__)
@@ -44,9 +42,9 @@ def home1(currency, crypto, time, interval):
     tydzien = str(datetime.datetime.now() - datetime.timedelta(days=14))[:10]
     data_pocz = getGraph(currency, crypto, time, interval)[1]
     x = getCrypto(crypto, data_pocz,  today, interval) 
-    # trend = exchange(crypto, data_start=tydzien, data_end=now, currency=currency)["Trend"]
+    trend = predict(crypto)
     result = x.to_html()
-    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=None, interval=interval)
+    return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=trend, interval=interval)
 
 
 if __name__ == '__main__':

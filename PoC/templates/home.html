@@ -34,10 +34,10 @@
     </header>
 
     <section class="crypto-section">
-      <h1 class="section-title">Discover the cryptocurrencies</h1>
+      <!--<h1 class="section-title">Discover the cryptocurrencies</h1>-->
       <div class="crypto-contaiener">
         {% for el in cryptos %}
-        <a href="/USD/{{el.name}}/7d/1">
+        <a href="/USD/{{el.name}}/7d/1d">
           <div class="crypto-box">
             <img
               src="{{ url_for('static', filename='img/' + el.name + '.png') }}"

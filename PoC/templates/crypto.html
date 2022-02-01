@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>CryptoMarket</title>
     <link
       rel="stylesheet"
       type="text/css"
@@ -45,19 +45,19 @@
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
-                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
                     <div class="dropdown-list__item">USD</div>
                   </a>
-                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
                     <div class="dropdown-list__item">PLN</div>
                   </a>
-                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
                     <div class="dropdown-list__item">EUR</div>
                   </a>
-                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}{{interval}}/" class="a-list">
+                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
                     <div class="dropdown-list__item">GBP</div>
                   </a>
-                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/" class="a-list">
+                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
                     <div class="dropdown-list__item">CHF</div>
                   </a>
                 </div>
@@ -90,7 +90,7 @@
             <div class="currency-container">
               {% for el in cryptos %}
               <!-- <a href="/{{el.currency}}/{{el.name}}/{{time}}"> -->
-              <a href="/{{currency}}/{{el.name}}/{{time}}">
+              <a href="/{{currency}}/{{el.name}}/{{time}}/{{interval}}/{{period}}">
                 <div class="crypto">
                   <img
                     class="crypto_logo"
@@ -125,23 +125,20 @@
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
-                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/1/" class="a-list">
+                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1d/" class="a-list">
                     <div class="dropdown-listitem">1 day</div>
                   </a>
-                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/2/" class="a-list">
-                    <div class="dropdown-listitem">2 days</div>
-                  </a>
-                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/5/" class="a-list">
+                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/5d/" class="a-list">
                     <div class="dropdown-listitem">5 days</div>
                   </a>
-                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}/10/" class="a-list">
-                    <div class="dropdown-listitem">10 days</div>
+                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1wk/" class="a-list">
+                    <div class="dropdown-listitem">1 week</div>
                   </a>
-                  <a
-                    href="/CHF/{{crypto[: -3]}}USD/{{time}}/30/"
-                    class="a-list"
-                  >
-                    <div class="dropdown-list__item">30 days</div>
+                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1mo/" class="a-list">
+                    <div class="dropdown-listitem">1 month</div>
+                  </a>
+                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/3mo/" class="a-list">
+                    <div class="dropdown-listitem">3 months</div>
                   </a>
                 </div>
               </div>
@@ -152,19 +149,19 @@
               Plotly.plot('bargraph',graphs,{});
             </script>
             <div class="days">
-              <a href="/{{currency}}/{{crypto}}/max/{{interval}}">
+              <a href="/{{currency}}/{{crypto}}/max/{{interval}}/{{period}}/">
                 <p>max</p>
               </a>
-              <a href="/{{currency}}/{{crypto}}/1y/{{interval}}">
+              <a href="/{{currency}}/{{crypto}}/1y/{{interval}}/{{period}}/">
                 <p>1y</p>
               </a>
-              <a href="/{{currency}}/{{crypto}}/6m/{{interval}}">
+              <a href="/{{currency}}/{{crypto}}/6m/{{interval}}/{{period}}/">
                 <p>6m</p>
               </a>
-              <a href="/{{currency}}/{{crypto}}/1m/{{interval}}">
+              <a href="/{{currency}}/{{crypto}}/1m/{{interval}}/{{period}}/">
                 <p>1m</p>
               </a>
-              <a href="/{{currency}}/{{crypto}}/7d/{{interval}}">
+              <a href="/{{currency}}/{{crypto}}/7d/{{interval}}/{{period}}/">
                 <p>7d</p>
               </a>
             </div>
@@ -184,20 +181,20 @@
           {% if prediction == "Down trend" %}
           <p class="predict-text"
             >The trend is
-            <span class="text-color" style="color: red">low</span>, It's good
-            time to sell crypto.
+            <span class="text-color" style="color: red">DOWN</span>, it's a bad
+            time to buy crypto.
           </p>
           {% elif prediction == "Up trend" %}
           <p class="predict-text"
             >The trend is
-            <span class="text-color" style="color: green">Up</span>, It's good
+            <span class="text-color" style="color: green">UP</span>, it's a good
             time to buy crypto.
           </p>
           {% elif prediction == "Flat trend" %}
           <p class="predict-text"
             >The trend is
-            <span class="text-color" style="color: green">Flat</span>, Hold
-            cryptocurrencies. {% endif %}
+            <span class="text-color" style="color: yellow">FLAT</span>, it's neither good 
+            or bad to buy and sell {% endif %}
           </p></div
         >
 

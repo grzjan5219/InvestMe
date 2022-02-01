@@ -10,8 +10,11 @@ crypto_release = {
     "ETH-USD" : "2017-11-10",
     "BNB-USD" : "2017-11-10",
     "DOGE-USD" : "2017-11-10",
-    "SOL1-USD" : "2021-09-28",
-    "USDT-USD" : "2017-11-10"
+    "SOL-USD" : "2021-09-28",
+    "USDT-USD" : "2017-11-10",
+    "AVAX-USD" : "2020-09-21",
+    "LINK-USD" : "2017-11-06",
+
 }
 
 def getGraph(currency, crypto, time, interval):

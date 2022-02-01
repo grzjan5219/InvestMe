@@ -4,8 +4,8 @@ import requests
 import datetime
 from pandas_datareader import data as pdr
 
-global trend
-
+now = str(datetime.datetime.now())[:10] # Zapisuje aktualną datę jako string (YYYY-MM-DD)
+tydzien = str(datetime.datetime.now() - datetime.timedelta(days=7))[:10]
 
 class RealTimeCurrencyConverter():
     def __init__(self, url):
@@ -54,3 +54,24 @@ def exchange(crp, data_start, data_end, currency, interval="1mo"):
         lista_calosc["Close"].append(converter.convert("USD", f'{currency}', df["Close"][i]))
 
     return lista_calosc
+
+def predict(crp="BTC-USD", data_start=tydzien, data_end=now):
+    dane = getCrypto(crp, data_start, data_end, interval="1d")
+    keys_to_remove = ["High", "Low", "Close", "Adj Close", "Volume", "Date"]
+    trend = 0
+    for key in keys_to_remove:
+        dane.pop(key)
+    dane = dane.values.tolist()
+    for i in range(1, len(dane)):
+        if dane[-i] > dane[-i-1]:
+            trend = trend + 1
+        elif dane[-i] == dane[-i-1]:
+            trend = trend + 0
+        else:
+            trend = trend - 1
+    if trend >= 1:
+        return "Up trend"
+    elif trend < 1 and trend > -1:
+        return "Flat Trend"
+    else:
+        return "Down trend"
