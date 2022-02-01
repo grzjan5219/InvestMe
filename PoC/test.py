@@ -30,8 +30,11 @@ def test3():
      if (len(str(x)) == 5):
          assert True
 
-#def test4():
-    #"""Test 4: """
+def test4():
+    """Test 2: Testing currency dictionary length - Bartek"""
+    x = addToList(currency= "USD")
+    if len(x[0].keys()) == 5:
+       assert True
 
 # def test5():
 #     """Test 5: """
