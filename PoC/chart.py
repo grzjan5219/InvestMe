@@ -52,6 +52,6 @@ def getGraph(currency, crypto, time, interval):
 
     fig.update_xaxes(color="#EEE4E4", gridcolor="#443838")
     fig.update_yaxes(color="#EEE4E4", gridcolor="#443838")
-    return fig
+    return fig, data_pocz
 
 
