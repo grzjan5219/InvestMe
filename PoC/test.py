@@ -24,11 +24,14 @@ def test2():
         assert True
 #TD: Dawid
 
-# def test3():
-#     """Test 3: """
+def test3():
+     """Test 3: Testing out, the crypto release definition - Piotrek """
+     x = to_percentage("BTC-USD")
+     if (len(str(x)) == 5):
+         assert True
 
-# def test4():
-#     """Test 4: """
+#def test4():
+    #"""Test 4: """
 
 # def test5():
 #     """Test 5: """
