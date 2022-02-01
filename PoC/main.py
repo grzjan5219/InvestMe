@@ -39,11 +39,11 @@ def home1(currency, crypto, time, interval):
 
     # list with cryptocurrencies data to display
     cryptos = addToList(currency)
-    tydzien = str(datetime.datetime.now() - datetime.timedelta(days=14))[:10]
     data_pocz = getGraph(currency, crypto, time, interval)[1]
-    x = getCrypto(crypto, data_pocz,  today, interval) 
+    x = getCrypto(crypto, data_pocz,  today, interval)
+    x = x.iloc[::-1]
     trend = predict(crypto)
-    result = x.to_html()
+    result = x.to_html(index=False)
     return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=trend, interval=interval)
 
 
