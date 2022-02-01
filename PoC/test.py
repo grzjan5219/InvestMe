@@ -11,7 +11,7 @@ def test1():
     x = predict()
     if x == "Up trend" or "Flat trend" or "Down trend":
         assert True
-#TD: Dawid
+#TD: Kuba
     
 def test2():
     """Test 2: Testing price getting of crypto """
