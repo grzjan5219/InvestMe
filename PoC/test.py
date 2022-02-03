@@ -69,3 +69,11 @@ def test7():
         assert True
     else:
         assert False
+        
+def test8():
+    """Test 8: Testing if output of exchange fucntion is correct and if it's dictonary - Tomasz"""
+    x = exchange("BTC-USD", "2021-01-01", "2022-01-01", "PLN", "1wk")
+    if isinstance(x, dict):
+        assert True
+    else:
+        assert False
