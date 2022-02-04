@@ -45,19 +45,34 @@
                   <i class="fa fa-caret-down icon"></i>
                 </div>
                 <div class="dropdown-list">
-                  <a href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
+                  <a
+                    href="/USD/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/"
+                    class="a-list"
+                  >
                     <div class="dropdown-list__item">USD</div>
                   </a>
-                  <a href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
+                  <a
+                    href="/PLN/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/"
+                    class="a-list"
+                  >
                     <div class="dropdown-list__item">PLN</div>
                   </a>
-                  <a href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
+                  <a
+                    href="/EUR/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/"
+                    class="a-list"
+                  >
                     <div class="dropdown-list__item">EUR</div>
                   </a>
-                  <a href="/GBP/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
+                  <a
+                    href="/GBP/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/"
+                    class="a-list"
+                  >
                     <div class="dropdown-list__item">GBP</div>
                   </a>
-                  <a href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/" class="a-list">
+                  <a
+                    href="/CHF/{{crypto[: -3]}}USD/{{time}}/{{interval}}/{{period}}/"
+                    class="a-list"
+                  >
                     <div class="dropdown-list__item">CHF</div>
                   </a>
                 </div>
@@ -71,16 +86,22 @@
               >
               <p class="procent">{{currentData[0].currentProcentage}}%</p>
 
-              {% if currentData[0].currentProcentage >= 0 %}
+              {% if currentData[0].currentProcentage > 0 %}
               <img
                 class="logo-arrow"
                 src=" {{ url_for('static', filename='img/arr_up.png') }}"
                 alt=""
               />
-              {% else %}
+              {% elif currentData[0].currentProcentage < 0 %}
               <img
                 class="logo-arrow"
                 src=" {{ url_for('static', filename='img/arr_down.png') }}"
+              />
+
+              {% else %}
+              <img
+                class="logo-arrow"
+                src=" {{ url_for('static', filename='img/arr_static.png') }}"
               />
               {% endif %}
             </div>
@@ -90,15 +111,17 @@
             <div class="currency-container">
               {% for el in cryptos %}
               <!-- <a href="/{{el.currency}}/{{el.name}}/{{time}}"> -->
-              <a href="/{{currency}}/{{el.name}}/{{time}}/{{interval}}/{{period}}">
+              <a
+                href="/{{currency}}/{{el.name}}/{{time}}/{{interval}}/{{period}}"
+              >
                 <div class="crypto">
                   <img
                     class="crypto_logo"
                     src="{{ url_for('static', filename='img/' + el.name + '.png') }}"
                   />
-                  <p class="crypto-price">{{el.price}}{{el.symbol}}</p>
+                  <p class="crypto-price">{{el.price}} {{el.symbol}}</p>
                   <p class="crypto-procent">{{el.percentage}}%</p>
-                  {% if el.percentage >= 0 %}
+                  {% if el.percentage > 0 %}
                   <img
                     class="arrow"
                     src=" {{ url_for('static', filename='img/arr_up.png') }}"
@@ -110,6 +133,11 @@
                     class="arrow"
                     src=" {{ url_for('static', filename='img/arr_down.png') }}"
                   />
+                  {% else %}
+                  <img
+                    class="arrow"
+                    src=" {{ url_for('static', filename='img/arr_static.png') }}"
+                  />
                   {% endif %}
                 </div>
               </a>
@@ -119,29 +147,44 @@
         </div>
         <div class="right">
           <div class="period">
-              <div class="dropdown">
-                <div class="dropdown-select">
-                  <span class="select"> Period</span>
-                  <i class="fa fa-caret-down icon"></i>
-                </div>
-                <div class="dropdown-list">
-                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1d/" class="a-list">
-                    <div class="dropdown-listitem">1 day</div>
-                  </a>
-                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/5d/" class="a-list">
-                    <div class="dropdown-listitem">5 days</div>
-                  </a>
-                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1wk/" class="a-list">
-                    <div class="dropdown-listitem">1 week</div>
-                  </a>
-                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1mo/" class="a-list">
-                    <div class="dropdown-listitem">1 month</div>
-                  </a>
-                  <a href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/3mo/" class="a-list">
-                    <div class="dropdown-listitem">3 months</div>
-                  </a>
-                </div>
+            <div class="dropdown">
+              <div class="dropdown-select">
+                <span class="select"> Period</span>
+                <i class="fa fa-caret-down icon"></i>
               </div>
+              <div class="dropdown-list">
+                <a
+                  href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1d/"
+                  class="a-list"
+                >
+                  <div class="dropdown-listitem">1 day</div>
+                </a>
+                <a
+                  href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/5d/"
+                  class="a-list"
+                >
+                  <div class="dropdown-listitem">5 days</div>
+                </a>
+                <a
+                  href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1wk/"
+                  class="a-list"
+                >
+                  <div class="dropdown-listitem">1 week</div>
+                </a>
+                <a
+                  href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/1mo/"
+                  class="a-list"
+                >
+                  <div class="dropdown-listitem">1 month</div>
+                </a>
+                <a
+                  href="/{{currency}}/{{crypto[: -3]}}USD/{{time}}/3mo/"
+                  class="a-list"
+                >
+                  <div class="dropdown-listitem">3 months</div>
+                </a>
+              </div>
+            </div>
           </div>
           <div class="chart" id="bargraph">
             <script type="text/javascript">
@@ -193,21 +236,26 @@
           {% elif prediction == "Flat trend" %}
           <p class="predict-text"
             >The trend is
-            <span class="text-color" style="color: yellow">FLAT</span>, it's neither good 
-            or bad to buy and sell {% endif %}
+            <span class="text-color" style="color: yellow">FLAT</span>, it's
+            neither good or bad to buy and sell {% endif %}
           </p></div
         >
 
         <div class="curr-converter">
           <div class="curr">
-            <p>{{crypto}}</p> <span></span>
-            <input class="curr-price" type="number" />
+            <p>{{crypto[:3]}}</p> <span></span>
+            <input
+              class="curr-price"
+              type="number"
+              placeholder="0"
+              style="color: white"
+            />
           </div>
 
           <img src="{{ url_for('static', filename='img/equal.PNG') }}" />
           <div class="curr">
             <p>{{currency}}</p> <span> </span>
-            <div class="exchange-output"> </div>
+            <div class="exchange-output">0.00</div>
           </div>
         </div>
       </div>

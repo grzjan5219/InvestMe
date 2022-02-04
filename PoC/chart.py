@@ -3,19 +3,20 @@ import plotly.graph_objects as go
 
 from api import *
 
-now = str(datetime.datetime.now())[:10] # Zapisuje aktualną datę jako string (YYYY-MM-DD)
+# Zapisuje aktualną datę jako string (YYYY-MM-DD)
+now = str(datetime.datetime.now())[:10]
 
 crypto_release = {
-    "BTC-USD" : "2014-09-30",
-    "ETH-USD" : "2017-11-10",
-    "BNB-USD" : "2017-11-10",
-    "DOGE-USD" : "2017-11-10",
-    "SOL-USD" : "2021-09-28",
-    "USDT-USD" : "2017-11-10",
-    "AVAX-USD" : "2020-09-21",
-    "LINK-USD" : "2017-11-06",
-
+    "BTC-USD": "2014-09-30",
+    "ETH-USD": "2017-11-10",
+    "DGD-USD": "2017-11-18",
+    "DOGE-USD": "2017-11-10",
+    "SOL-USD": "2021-09-28",
+    "USDT-USD": "2017-11-10",
+    "AVAX-USD": "2020-09-21",
+    "LINK-USD": "2017-11-06",
 }
+
 
 def getGraph(currency, crypto, time, interval):
     stopDelta = False
@@ -42,19 +43,17 @@ def getGraph(currency, crypto, time, interval):
         data_pocz = str(datetime.datetime.now() - delta)[:10]
         df = exchange(crypto, data_pocz, now, currency)
     fig = go.Figure(data=[go.Candlestick(x=df['Date'],
-                open=df['Open'],
-                high=df['High'],
-                low=df['Low'],
-                close=df['Close'])])
+                                         open=df['Open'],
+                                         high=df['High'],
+                                         low=df['Low'],
+                                         close=df['Close'])])
     fig.update_layout(
-    plot_bgcolor='#312929',
-    paper_bgcolor="#312929",
-    font_color = "#EEE4E4",
-    font_family = "Poppins",
+        plot_bgcolor='#312929',
+        paper_bgcolor="#312929",
+        font_color="#EEE4E4",
+        font_family="Poppins",
     )
 
     fig.update_xaxes(color="#EEE4E4", gridcolor="#443838")
     fig.update_yaxes(color="#EEE4E4", gridcolor="#443838")
     return fig, data_pocz
-
-

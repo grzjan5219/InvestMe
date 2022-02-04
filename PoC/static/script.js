@@ -6,6 +6,7 @@ const outputContainer = document.querySelector('.exchange-output');
 
 window.addEventListener('load', (e) => {
   table = `${text.textContent}`;
+  console.log(table);
   text.remove();
   container.insertAdjacentHTML('afterbegin', table);
 });

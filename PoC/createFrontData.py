@@ -11,8 +11,8 @@ def currentNameFunc(crypto, currency):
         currentName = 'Ethereum'
     elif crypto == 'BTC-USD':
         currentName = 'Bitcoin'
-    elif crypto == 'BNB-USD':
-        currentName = 'Binance Coin'
+    elif crypto == 'DGD-USD':
+        currentName = 'DigixDAO Coin'
     elif crypto == 'DOGE-USD':
         currentName = 'Dogecoin'
     elif crypto == "USDT-USD":
@@ -27,7 +27,7 @@ def currentNameFunc(crypto, currency):
 
 
 def get():
-    data = yf.download(tickers="BTC-USD ETH-USD DOGE-USD USDT-USD LINK-USD SOL-USD AVAX-USD BNB-USD", period='2d',
+    data = yf.download(tickers="BTC-USD ETH-USD DOGE-USD USDT-USD LINK-USD SOL-USD AVAX-USD DGD-USD", period='2d',
                        interval='1d')['Close']
     return data
 
@@ -53,13 +53,14 @@ def to_percentage(crypto):
 def createDictCryptos(crypto, currency):
     crp_data = d[f'{crypto}'].to_dict()
     crp_list = list(crp_data.values())[1]
-    # print(crp_list)
+    x = to_percentage(crypto)
     result = {}
     result["name"] = crypto
     result["price"] = ex(crp_list, currency)
     result["img"] = "{{url_for('static', filename='img/{crypto}')}"
     result["symbol"] = CurrencySymbols.get_symbol(currency)
-    result["percentage"] = to_percentage(crypto)
+    result["percentage"] = x
+    result["percentage_display"] = str(x)
 
     return result
 
@@ -68,7 +69,7 @@ def addToList(currency):
     cryptos = []
     cryptos.extend((createDictCryptos('BTC-USD', currency),
                    createDictCryptos('ETH-USD', currency),
-                   createDictCryptos('BNB-USD', currency),
+                    createDictCryptos('DGD-USD', currency),
                     createDictCryptos('SOL-USD', currency),
                     createDictCryptos('AVAX-USD', currency),
                     createDictCryptos('LINK-USD', currency),

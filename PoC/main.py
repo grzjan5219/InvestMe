@@ -27,23 +27,26 @@ def home1(currency, crypto, time, interval):
     # list with data abaout current cryptocurrency to display
     c = d[f'{crypto}'].to_dict()
     a = list(c.values())[1]
+
     currentData = [
         {
             'currentSymbol': CurrencySymbols.get_symbol(currency),
             'currentName': currentNameFunc(crypto, currency),
             'currentPrice':  ex(a, currency),
-            'currentProcentage': to_percentage(crypto)
+            'currentProcentage': to_percentage(crypto),
         }
     ]
-
 
     # list with cryptocurrencies data to display
     cryptos = addToList(currency)
     data_pocz = getGraph(currency, crypto, time, interval)[1]
-    x = getCrypto(crypto, data_pocz,  today, interval)
+    x = exchange(crypto, data_pocz, today, currency, interval="1d")
+    print(x)
+    x = pd.DataFrame.from_dict(x)
     x = x.iloc[::-1]
     trend = predict(crypto)
     result = x.to_html(index=False)
+
     return render_template("crypto.html", currentData=currentData, cryptos=cryptos, graphJSON=graphJSON, crypto=crypto, time=time, currency=currency, result=result, prediction=trend, interval=interval)
 
 
