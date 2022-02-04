@@ -37,11 +37,11 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
-th{
+th {
   border: none;
   text-align: left;
 }
-td{
+td {
   border: none;
 }
 tr {
@@ -166,8 +166,7 @@ tr:nth-child(odd) {
 
 .currencys {
   width: 25vw;
-
-  height: 61vh;
+  height: 68vh;
   overflow: scroll;
   overflow-x: hidden;
   /* height: 58.5vh; */
@@ -277,7 +276,6 @@ tr:nth-child(odd) {
   color: #eee4e4;
 }
 
-
 .days p {
   width: 60px;
   color: #eee4e4;
@@ -302,13 +300,14 @@ tr:nth-child(odd) {
     width: 22vw;
   }
   .currencys {
-    height: 60.3vh;
+    height: 65.3vh;
   }
 
   .chart,
   .container,
   table,
-  .days {
+  .days,
+  .period {
     width: 50vw;
   }
 }
