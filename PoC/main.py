@@ -40,7 +40,9 @@ def home1(currency, crypto, time, interval):
     # list with cryptocurrencies data to display
     cryptos = addToList(currency)
     data_pocz = getGraph(currency, crypto, time, interval)[1]
-    x = getCrypto(crypto, data_pocz,  today, interval)
+    x = exchange(crypto, data_pocz, today, currency, interval="1d")
+    print(x)
+    x = pd.DataFrame.from_dict(x)
     x = x.iloc[::-1]
     trend = predict(crypto)
     result = x.to_html(index=False)

@@ -36,7 +36,7 @@ def getCrypto(crp, data_start, data_end, interval):
     return crphistory
 
 
-def exchange(crp, data_start, data_end, currency, interval="1mo"):
+def exchange(crp, data_start, data_end, currency, interval="1mo", tabela=False):
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
     converter = RealTimeCurrencyConverter(url)
     df = getCrypto(crp, data_start, data_end, interval)
@@ -54,6 +54,7 @@ def exchange(crp, data_start, data_end, currency, interval="1mo"):
         lista_calosc["Close"].append(converter.convert("USD", f'{currency}', df["Close"][i]))
 
     return lista_calosc
+
 
 def predict(crp="BTC-USD", data_start=tydzien, data_end=now):
     dane = getCrypto(crp, data_start, data_end, interval="1d")
