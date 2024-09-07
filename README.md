@@ -35,3 +35,5 @@ All the required modules required to run the application can be installed by the
 It is named: ' import_modules.py '
 
 ########## Setup ###########
+
+To jest przykładowa zmiana jaką wprowadzam dla tej werji (branchy) w moim repo
