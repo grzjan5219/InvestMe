@@ -28,10 +28,6 @@ pandas_datareader - A pandas relative library, used for improving the managing p
 requests - A built-in Python module, used for getting the data from the API.
 datetime - A bult-in Python module, that is rather self-explanatory - used for getting data about time and date.
 currency-symbols - A library used as the name advises - for getting currency symbols.
-plotly - The library responsible for drawing the graph of the application, that represents the collected data.
-json - A built-in Python module, used for file conversion, to make the data usable by graph-drawing library.
 
-All the required modules required to run the application can be installed by the executable file that comes included. 
-It is named: ' import_modules.py '
 
-########## Setup ###########
+TO jest dowóð na to że zmieniłem ten plik
