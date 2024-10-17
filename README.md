@@ -31,3 +31,12 @@ currency-symbols - A library used as the name advises - for getting currency sym
 
 
 TO jest dowóð na to że zmieniłem ten plik
+Dorabiam dorabiam
+Dorabiam dorabiam
+Dorabiam dorabiam
+Dorabiam dorabiam
+Dorabiam dorabiam
+Dorabiam dorabiam
+Dorabiam dorabiam
+Dorabiam dorabiam
+
