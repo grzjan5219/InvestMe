@@ -35,4 +35,5 @@ json - A built-in Python module, used for file conversion, to make the data usab
 
 All the required modules required to run the application can be installed by the executable file that comes included. 
 It is named: ' import_modules.py '
+
 ########## Setup ###########
