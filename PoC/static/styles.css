@@ -8,9 +8,11 @@
   text-decoration: none;
   /* background-color: #333333; */
 }
+
 body {
   background-color: #333333;
 }
+
 .main {
   height: 100vh;
   background-color: #333333;
@@ -20,11 +22,13 @@ body {
   width: 90px;
   position: relative;
 }
+
 .dropdown:hover .dropdown-list {
   opacity: 1;
   border-radius: 10px;
   visibility: visible;
 }
+
 .dropdown-select {
   padding-top: 7px;
   border-radius: 4px;
@@ -37,19 +41,24 @@ body {
   font-size: 1rem;
   cursor: pointer;
 }
+
 th {
   border: none;
   text-align: left;
 }
+
 td {
   border: none;
 }
+
 tr {
   background-color: #312929;
 }
+
 tr:nth-child(odd) {
   background-color: #221c1c;
 }
+
 .dropdown-list {
   border-radius: 4px;
   background-color: #312929;
@@ -64,9 +73,11 @@ tr:nth-child(odd) {
   transform: translateY(10px);
   z-index: 10;
 }
+
 .dropdown-list a {
   color: #eee4e4;
 }
+
 .dropdown-list:before {
   content: '';
   width: 100%;
@@ -77,6 +88,7 @@ tr:nth-child(odd) {
   left: 0;
   transform: translateY(-100%);
 }
+
 .dropdown-list__item {
   padding: 1rem;
   font-size: 1.4rem;
@@ -127,16 +139,19 @@ tr:nth-child(odd) {
 .box-one p {
   padding-top: 5px;
 }
+
 .fa-bitcoin {
   font-size: 40px;
   color: #f7931a;
   background-color: #fff;
   border-radius: 30px;
 }
+
 .blank {
   font-size: 10px;
   color: #312929;
 }
+
 .box-two {
   display: flex;
   align-self: center;
@@ -160,6 +175,7 @@ tr:nth-child(odd) {
   font-size: 18px;
   padding-top: 20px;
 }
+
 .logo {
   width: 40px;
   height: 40px;
@@ -172,13 +188,16 @@ tr:nth-child(odd) {
   overflow-x: hidden;
   /* height: 58.5vh; */
 }
+
 .logo-arrow {
   padding: 20px;
   height: 30px;
 }
+
 .arrow {
   height: 30px;
 }
+
 .currency-title {
   text-align: center;
   color: white;
@@ -213,6 +232,7 @@ tr:nth-child(odd) {
   font-weight: 800;
   color: #eee4e4;
 }
+
 ::-webkit-scrollbar {
   width: 20px;
 }
@@ -246,6 +266,7 @@ tr:nth-child(odd) {
   width: calc(92vw - 20vw);
   /* margin-left: 6vw; */
 }
+
 .chart {
   width: 56vw;
   height: 48vh;
@@ -262,6 +283,7 @@ tr:nth-child(odd) {
   background-color: #312929;
   padding-bottom: 30px;
 }
+
 .period {
   display: flex;
   margin: 0 auto;
@@ -292,15 +314,18 @@ tr:nth-child(odd) {
 }
 
 @media (max-width: 1600px) {
+
   .currency-price,
   .currencys {
     width: 30vw;
   }
+
   .box-two,
   .box-one,
   .crypto {
     width: 22vw;
   }
+
   .currencys {
     height: 65.3vh;
   }
@@ -318,20 +343,25 @@ tr:nth-child(odd) {
   .box-two {
     justify-content: space-around;
   }
+
   .box-two .price {
     padding-top: 20px;
     font-size: 25px;
   }
+
   .box-two .procent {
     font-size: 15px;
     padding-top: 30px;
   }
+
   .arrow {
     padding-top: 18px;
   }
+
   .crypto .crypto-price {
     font-size: 18px;
   }
+
   .crypto .crypto-procent {
     font-size: 13px;
   }
@@ -340,9 +370,11 @@ tr:nth-child(odd) {
   .currencys {
     width: 35vw;
   }
+
   .currencys {
     height: 59vh;
   }
+
   .box-two,
   .box-one,
   .crypto {
@@ -354,18 +386,23 @@ tr:nth-child(odd) {
   .box-two .price {
     font-size: 22px;
   }
+
   .box-two .procent {
     font-size: 12px;
   }
+
   .arrow {
     padding-top: 18px;
   }
+
   .crypto .crypto-price {
     font-size: 14px;
   }
+
   .crypto .crypto-procent {
     font-size: 10px;
   }
+
   .crypto img {
     width: 40px;
   }
@@ -375,6 +412,7 @@ tr:nth-child(odd) {
   .flex-container {
     flex-wrap: wrap;
   }
+
   .currency-price,
   .currencys {
     width: 80vw;
@@ -389,6 +427,7 @@ tr:nth-child(odd) {
   .main {
     height: 176vh;
   }
+
   .flex-container {
     margin: 0 auto;
   }
@@ -396,10 +435,12 @@ tr:nth-child(odd) {
   .right {
     margin-left: 6vw;
   }
+
   .chart,
   .container {
     width: 80vw;
   }
+
   .currency-container {
     height: 0vh;
   }
@@ -450,6 +491,7 @@ a:hover {
   align-items: center;
   justify-content: center;
 }
+
 .predict-text {
   font-weight: 500;
   font-size: 28px;
@@ -469,6 +511,7 @@ a:hover {
   border-radius: 10px;
   background-color: #312929;
 }
+
 .curr-converter img {
   width: 60px;
   margin: 0 1vw;
@@ -495,6 +538,7 @@ a:hover {
   width: 6vw;
   height: 40px;
 }
+
 .curr span {
   font-size: 40px;
   background-color: #707070;
@@ -502,6 +546,7 @@ a:hover {
   margin: 0 20px;
   height: 40px;
 }
+
 .foot {
   display: flex;
   justify-content: center;
@@ -511,10 +556,12 @@ a:hover {
   height: 10vh;
   background-color: #312929;
 }
+
 .foot p {
   font-size: 20px;
   color: #eee4e4;
 }
+
 .exchange-output {
   width: 100px;
   font-size: 20px;

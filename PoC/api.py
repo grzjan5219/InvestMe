@@ -26,46 +26,45 @@ class RealTimeCurrencyConverter():
         return amount
 
 
-yf.pdr_override()
 pd.set_option("display.max_rows", None, "display.max_columns", None)
 
-
 def getCrypto(crp, data_start, data_end, interval):
-    crphistory = pdr.get_data_yahoo(
-        crp, start=data_start, end=data_end, interval=interval)
+    crphistory = yf.download(
+        auto_adjust=True,
+        tickers=crp,
+        start=data_start,
+        end=data_end,
+        interval=interval
+    )
     crphistory = crphistory.reset_index()
     for i in ['Open', 'High', 'Close', 'Low']:
         crphistory[i] = crphistory[i].astype('float64')
     return crphistory
 
 
-def exchange(crp, data_start, data_end, currency, interval="1mo", tabela=False):
+def exchange(crp, data_start, data_end, currency, interval="1mo"):
     url = 'https://api.exchangerate-api.com/v4/latest/USD'
     converter = RealTimeCurrencyConverter(url)
     df = getCrypto(crp, data_start, data_end, interval)
-    keys_to_remove = ["Adj Close", "Volume"]
-    for key in keys_to_remove:
-        df.pop(key)
-
-    lista_calosc = {"Date": [], "Open": [], "High": [], "Low": [], "Close": []}
-
+    
+    lista_calosc = {"Date": [], "Close": [], "High": [], "Low": [], "Open": []}
     for i in range(len(df["Open"])):
         lista_calosc["Date"].append(str(df["Date"][i])[:10])
-        lista_calosc["Open"].append(converter.convert(
-            "USD", f'{currency}', df["Open"][i]))
-        lista_calosc["High"].append(converter.convert(
-            "USD", f'{currency}', df["High"][i]))
-        lista_calosc["Low"].append(converter.convert(
-            "USD", f'{currency}', df["Low"][i]))
         lista_calosc["Close"].append(converter.convert(
-            "USD", f'{currency}', df["Close"][i]))
+            "USD", f'{currency}', float(df["Close"].iloc[i].to_string(header=False, index=False))))
+        lista_calosc["High"].append(converter.convert(
+            "USD", f'{currency}', float(df["High"].iloc[i].to_string(header=False, index=False))))
+        lista_calosc["Low"].append(converter.convert(
+            "USD", f'{currency}', float(df["Low"].iloc[i].to_string(header=False, index=False))))
+        lista_calosc["Open"].append(converter.convert(
+            "USD", f'{currency}', float(df["Open"].iloc[i].to_string(header=False, index=False))))
 
     return lista_calosc
 
 
 def predict(crp="BTC-USD", data_start=tydzien, data_end=now):
     dane = getCrypto(crp, data_start, data_end, interval="1d")
-    keys_to_remove = ["High", "Low", "Close", "Adj Close", "Volume", "Date"]
+    keys_to_remove = ["High", "Low", "Close", "Date"]
     trend = 0
     for key in keys_to_remove:
         dane.pop(key)

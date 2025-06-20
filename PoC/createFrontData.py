@@ -11,8 +11,6 @@ def currentNameFunc(crypto, currency):
         currentName = 'Ethereum'
     elif crypto == 'BTC-USD':
         currentName = 'Bitcoin'
-    elif crypto == 'DGD-USD':
-        currentName = 'DigixDAO Coin'
     elif crypto == 'DOGE-USD':
         currentName = 'Dogecoin'
     elif crypto == "USDT-USD":
@@ -27,7 +25,7 @@ def currentNameFunc(crypto, currency):
 
 
 def get():
-    data = yf.download(tickers="BTC-USD ETH-USD DOGE-USD USDT-USD LINK-USD SOL-USD AVAX-USD DGD-USD", period='2d',
+    data = yf.download(auto_adjust=True, tickers="BTC-USD ETH-USD DOGE-USD USDT-USD LINK-USD SOL-USD AVAX-USD", period='2d',
                        interval='1d')['Close']
     return data
 
@@ -69,7 +67,6 @@ def addToList(currency):
     cryptos = []
     cryptos.extend((createDictCryptos('BTC-USD', currency),
                    createDictCryptos('ETH-USD', currency),
-                    createDictCryptos('DGD-USD', currency),
                     createDictCryptos('SOL-USD', currency),
                     createDictCryptos('AVAX-USD', currency),
                     createDictCryptos('LINK-USD', currency),

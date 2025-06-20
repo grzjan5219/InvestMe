@@ -33,11 +33,11 @@
                 alt=""
               />
 
-              <p
-                ><span class="blank">d </span> {{currentData[0].currentName}}
+              <p>
+                <span class="blank">d </span> {{currentData[0].currentName}}
 
-                <span class="blank">d </span></p
-              >
+                <span class="blank">d </span>
+              </p>
               <p>(</p>
               <div class="dropdown">
                 <div class="dropdown-select">
@@ -80,10 +80,9 @@
               <p>)</p>
             </div>
             <div class="box-two">
-              <p class="price"
-                >{{currentData[0].currentPrice}}
-                {{currentData[0].currentSymbol}}</p
-              >
+              <p class="price">
+                {{currentData[0].currentPrice}} {{currentData[0].currentSymbol}}
+              </p>
               <p class="procent">{{currentData[0].currentProcentage}}%</p>
 
               {% if currentData[0].currentProcentage > 0 %}
@@ -107,7 +106,7 @@
             </div>
           </div>
           <div class="currencys">
-            <p class="currency-title">Cryptocurrencies </p>
+            <p class="currency-title">Cryptocurrencies</p>
             <div class="currency-container">
               {% for el in cryptos %}
               <!-- <a href="/{{el.currency}}/{{el.name}}/{{time}}"> -->
@@ -222,28 +221,29 @@
       <div class="bottom">
         <div class="predict">
           {% if prediction == "Down trend" %}
-          <p class="predict-text"
-            >The trend is
+          <p class="predict-text">
+            The trend is
             <span class="text-color" style="color: red">DOWN</span>, it's a bad
             time to buy crypto.
           </p>
           {% elif prediction == "Up trend" %}
-          <p class="predict-text"
-            >The trend is
+          <p class="predict-text">
+            The trend is
             <span class="text-color" style="color: green">UP</span>, it's a good
             time to buy crypto.
           </p>
           {% elif prediction == "Flat trend" %}
-          <p class="predict-text"
-            >The trend is
+          <p class="predict-text">
+            The trend is
             <span class="text-color" style="color: yellow">FLAT</span>, it's
             neither good or bad to buy and sell {% endif %}
-          </p></div
-        >
+          </p>
+        </div>
 
         <div class="curr-converter">
           <div class="curr">
-            <p>{{crypto[:3]}}</p> <span></span>
+            <p>{{crypto[:3]}}</p>
+            <span></span>
             <input
               class="curr-price"
               type="number"
@@ -254,7 +254,8 @@
 
           <img src="{{ url_for('static', filename='img/equal.PNG') }}" />
           <div class="curr">
-            <p>{{currency}}</p> <span> </span>
+            <p>{{currency}}</p>
+            <span> </span>
             <div class="exchange-output">0.00</div>
           </div>
         </div>

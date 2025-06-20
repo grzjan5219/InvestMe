@@ -9,7 +9,6 @@ now = str(datetime.datetime.now())[:10]
 crypto_release = {
     "BTC-USD": "2014-09-30",
     "ETH-USD": "2017-11-10",
-    "DGD-USD": "2017-11-18",
     "DOGE-USD": "2017-11-10",
     "SOL-USD": "2021-09-28",
     "USDT-USD": "2017-11-10",
